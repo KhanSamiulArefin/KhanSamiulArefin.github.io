@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chaldal - Smart Recipe Discovery</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *{
@@ -14,8 +15,8 @@
         }
 
         body {
-            background-color: #fff9e6;
-            color: #333;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -46,25 +47,24 @@
         }
 
         .logo-image {
-            width: 120px;  /* Large size */
-            height: 120px; /* Large size */
-            border-radius: 25%; /* Rounded square (25% gives nice rounded corners) */
-            object-fit: contain; /* Changed from cover to contain to show full image */
-             /* Thicker border */
-            box-shadow: 0 4px 12px rgba(255, 235, 59, 0.4); /* More prominent shadow */
-            background-color: rgb(252, 224, 98); /* Added background for better visibility */
+            width: 120px;
+            height: 120px;
+            border-radius: 25%;
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(255, 235, 59, 0.4);
+            background-color: rgb(253, 219, 97);
         }
 
         /* For mobile devices, adjust the logo size */
         @media (max-width: 767px) {
             .logo-image {
-                width: 100px;  /* Still large */
+                width: 100px;
                 height: 100px;
             }
         }
 
         .nav-items {
-            display: none; /* Hidden by default on mobile */
+            display: none;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -147,6 +147,49 @@
             position: relative;
         }
 
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #333;
+            transition: all 0.3s;
+        }
+
+        .language-switcher:hover {
+            background: #444;
+        }
+
+        .language-flag {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .flag-en {
+            background: #1a237e;
+            color: white;
+        }
+
+        .flag-bn {
+            background: #006a4e;
+            color: #f42a41;
+        }
+
+        .language-text {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
         /* Main Content Styles */
         .main-content {
             max-width: 1200px;
@@ -172,23 +215,23 @@
         h1 {
             font-size: 24px;
             margin-bottom: 8px;
-            color: #000;
+            color: #f0f0f0;
         }
 
         h2 {
             font-size: 20px;
             margin-bottom: 12px;
-            color: #000;
+            color: #f0f0f0;
         }
 
         h3 {
             font-size: 18px;
             margin-bottom: 8px;
-            color: #000;
+            color: #f0f0f0;
         }
 
         .subtitle {
-            color: #666;
+            color: #aaa;
             margin-bottom: 20px;
             font-size: 14px;
             line-height: 1.5;
@@ -203,10 +246,10 @@
         }
 
         .category-card {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -232,6 +275,7 @@
             font-weight: bold;
             margin-bottom: 4px;
             text-align: center;
+            color: #f0f0f0;
         }
 
         .subcategories {
@@ -242,17 +286,19 @@
 
         .subcategory {
             padding: 8px;
-            background: #fff9e6;
+            background: #333;
             border-radius: 4px;
             margin-bottom: 5px;
             text-align: center;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
+            color: #f0f0f0;
         }
 
         .subcategory:hover {
             background: #ffeb3b;
+            color: #000;
         }
 
         .category-card.active .subcategories {
@@ -272,7 +318,7 @@
         }
 
         .entry-card {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -301,17 +347,18 @@
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 8px;
+            color: #f0f0f0;
         }
 
         .entry-desc {
-            color: #666;
+            color: #aaa;
             font-size: 13px;
             line-height: 1.4;
         }
 
         /* Ingredient Selection Styles */
         .ingredient-section {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -328,17 +375,18 @@
         .ingredient-pill {
             display: flex;
             align-items: center;
-            background-color: #fff9e6;
+            background-color: #333;
             border: 1px solid #ffeb3b;
             border-radius: 16px;
             padding: 6px 12px;
             font-size: 13px;
+            color: #f0f0f0;
         }
 
         .ingredient-pill.conflict {
-            background-color: #ffebee;
+            background-color: #5a1a1a;
             border-color: #ff5722;
-            color: #c0392b;
+            color: #ff8a80;
         }
 
         .ingredient-pill .remove {
@@ -348,20 +396,25 @@
             font-weight: bold;
         }
 
+        /* Modern Clear Buttons */
         .clear-filter-btn {
-            background: #ffeb3b;
-            color: #000;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 16px;
+            background: #333;
+            color: #f0f0f0;
+            border: 1px solid #ffeb3b;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 13px;
             cursor: pointer;
-            margin-left: 10px;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .clear-filter-btn:hover {
-            background: #fbc02d;
+            background: #ffeb3b;
+            color: #000;
+            transform: translateY(-2px);
         }
 
         .suggestions-grid {
@@ -372,14 +425,15 @@
         }
 
         .suggestion-card {
-            border: 1px solid #eee;
+            border: 1px solid #333;
             border-radius: 6px;
             padding: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            background: white;
+            background: #1a1a1a;
             position: relative;
+            color: #f0f0f0;
         }
 
         .suggestion-card:hover {
@@ -395,7 +449,7 @@
 
         .suggestion-card.disabled:hover {
             transform: none;
-            border-color: #eee;
+            border-color: #333;
             box-shadow: none;
         }
 
@@ -406,7 +460,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255,255,255,0.8);
+            background: rgba(0,0,0,0.8);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -429,7 +483,7 @@
         }
 
         .suggestion-card.disabled .suggestion-icon {
-            color: #ccc;
+            color: #666;
         }
 
         /* Recipe Grid Styles */
@@ -441,7 +495,7 @@
         }
 
         .recipe-card {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
@@ -458,12 +512,11 @@
         .recipe-image {
             width: 100%;
             height: 150px;
-            background: linear-gradient(135deg, #ffeb3b, #fbc02d);
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #000;
-            font-size: 16px;
             position: relative;
         }
 
@@ -493,13 +546,13 @@
         .recipe-title {
             font-size: 16px;
             margin-bottom: 8px;
-            color: #000;
+            color: #f0f0f0;
         }
 
         .recipe-meta {
             display: flex;
             justify-content: space-between;
-            color: #666;
+            color: #aaa;
             font-size: 12px;
             margin-bottom: 8px;
         }
@@ -509,13 +562,14 @@
             align-items: center;
             font-weight: bold;
             font-size: 12px;
+            color: #f0f0f0;
         }
 
         .score-circle {
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            background: conic-gradient(#ffeb3b 0% 80%, #eee 80% 100%);
+            background: conic-gradient(#ffeb3b 0% 80%, #333 80% 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -534,13 +588,12 @@
         .recipe-detail-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, #ffeb3b, #fbc02d);
+            background-size: cover;
+            background-position: center;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #000;
-            font-size: 18px;
             position: relative;
         }
 
@@ -551,14 +604,15 @@
 
         .ingredient-item {
             padding: 8px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #333;
             display: flex;
             align-items: center;
             font-size: 14px;
+            color: #f0f0f0;
         }
 
         .ingredient-item.has {
-            color: #27ae60;
+            color: #4caf50;
         }
 
         .ingredient-item:before {
@@ -569,7 +623,7 @@
 
         .ingredient-item.has:before {
             content: "✓";
-            color: #27ae60;
+            color: #4caf50;
         }
 
         .steps-list {
@@ -582,6 +636,7 @@
             padding: 8px 0;
             line-height: 1.5;
             font-size: 14px;
+            color: #f0f0f0;
         }
 
         .action-buttons {
@@ -618,13 +673,13 @@
         }
 
         .btn-secondary {
-            background-color: white;
-            color: #000;
+            background-color: #333;
+            color: #f0f0f0;
             border: 1px solid #ffeb3b;
         }
 
         .btn-secondary:hover {
-            background-color: #fff9e6;
+            background-color: #444;
         }
 
         /* Filter Styles */
@@ -637,18 +692,19 @@
 
         .filter-pill {
             padding: 6px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid #333;
             border-radius: 16px;
             font-size: 12px;
             cursor: pointer;
             transition: all 0.3s;
-            background: white;
+            background: #1a1a1a;
+            color: #f0f0f0;
         }
 
         .filter-pill.active {
-            background-color: #fff9e6;
+            background-color: #333;
             border-color: #ffeb3b;
-            color: #000;
+            color: #ffeb3b;
         }
 
         .filter-pill:hover {
@@ -657,7 +713,7 @@
 
         /* AI Features Section */
         .ai-features {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -672,12 +728,13 @@
         }
 
         .feature-card {
-            border: 1px solid #eee;
+            border: 1px solid #333;
             border-radius: 6px;
             padding: 15px;
             text-align: center;
             transition: all 0.3s;
-            background: white;
+            background: #1a1a1a;
+            color: #f0f0f0;
         }
 
         .feature-card:hover {
@@ -699,7 +756,7 @@
 
         .feature-desc {
             font-size: 12px;
-            color: #666;
+            color: #aaa;
             line-height: 1.4;
         }
 
@@ -707,28 +764,29 @@
         .search-bar {
             width: 100%;
             padding: 10px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #333;
             border-radius: 6px;
             font-size: 14px;
-            background-color: white;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
             padding: 40px 15px;
-            color: #666;
+            color: #aaa;
         }
 
         .empty-state-icon {
             font-size: 40px;
             margin-bottom: 15px;
-            color: #ddd;
+            color: #444;
         }
 
         /* Dietary Preferences */
         .dietary-preferences {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -744,30 +802,31 @@
 
         .preference-option {
             padding: 6px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid #333;
             border-radius: 16px;
             font-size: 12px;
             cursor: pointer;
             transition: all 0.3s;
-            background: white;
+            background: #1a1a1a;
+            color: #f0f0f0;
         }
 
         .preference-option.active {
-            background-color: #fff9e6;
+            background-color: #333;
             border-color: #ffeb3b;
-            color: #000;
+            color: #ffeb3b;
         }
 
         .preference-option.conflict {
-            background-color: #ffebee;
+            background-color: #5a1a1a;
             border-color: #ff5722;
-            color: #c0392b;
+            color: #ff8a80;
             cursor: not-allowed;
         }
 
         /* Dietary Conflict Alert */
         .dietary-alert {
-            background: #ffebee;
+            background: #5a1a1a;
             border: 1px solid #ff5722;
             border-radius: 6px;
             padding: 12px;
@@ -783,14 +842,14 @@
         }
 
         .dietary-alert p {
-            color: #c0392b;
+            color: #ff8a80;
             font-size: 13px;
             margin: 0;
         }
 
         /* Dietary Conflict Resolution */
         .conflict-resolution {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -819,8 +878,8 @@
         }
 
         .resolution-secondary {
-            background-color: white;
-            color: #000;
+            background-color: #333;
+            color: #f0f0f0;
             border: 1px solid #ffeb3b;
         }
 
@@ -841,7 +900,7 @@
 
         .star {
             font-size: 20px;
-            color: #ddd;
+            color: #444;
             cursor: pointer;
             transition: color 0.2s;
         }
@@ -852,12 +911,12 @@
 
         .rating-text {
             font-size: 13px;
-            color: #666;
+            color: #aaa;
         }
 
         /* Voice Assistant */
         .voice-assistant-container {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -890,14 +949,14 @@
         }
 
         .voice-btn.secondary {
-            background-color: white;
-            color: #000;
+            background-color: #333;
+            color: #f0f0f0;
             border: 1px solid #ffeb3b;
         }
 
         .voice-status {
             font-size: 13px;
-            color: #666;
+            color: #aaa;
             font-style: italic;
             text-align: center;
         }
@@ -939,7 +998,7 @@
         }
 
         .video-card {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
@@ -956,7 +1015,8 @@
         .video-thumbnail {
             width: 100%;
             height: 150px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -981,19 +1041,19 @@
         .video-title {
             font-size: 16px;
             margin-bottom: 8px;
-            color: #000;
+            color: #f0f0f0;
         }
 
         .video-meta {
             display: flex;
             justify-content: space-between;
-            color: #666;
+            color: #aaa;
             font-size: 12px;
         }
 
         /* AI Recipe Generator */
         .ai-generator {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -1003,20 +1063,23 @@
         .ai-input {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
+            border: 1px solid #333;
             border-radius: 6px;
             font-size: 14px;
             margin: 12px 0;
             resize: vertical;
             min-height: 80px;
+            background: #1a1a1a;
+            color: #f0f0f0;
         }
 
         .ai-result {
-            background: #f8f9fa;
+            background: #333;
             border-radius: 6px;
             padding: 15px;
             margin-top: 15px;
             display: none;
+            color: #f0f0f0;
         }
 
         .ai-result.active {
@@ -1026,7 +1089,7 @@
 
         /* Smart Pantry */
         .pantry-section {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -1041,28 +1104,29 @@
         }
 
         .pantry-item {
-            border: 1px solid #eee;
+            border: 1px solid #333;
             border-radius: 6px;
             padding: 12px;
             text-align: center;
             transition: all 0.3s;
-            background: white;
+            background: #1a1a1a;
             position: relative;
+            color: #f0f0f0;
         }
 
         .pantry-item.low {
             border-color: #ff5722;
-            background-color: #ffebee;
+            background-color: #5a1a1a;
         }
 
         .pantry-item.medium {
             border-color: #fbc02d;
-            background-color: #fef9e7;
+            background-color: #5a4a1a;
         }
 
         .pantry-item.full {
-            border-color: #27ae60;
-            background-color: #e8f8f1;
+            border-color: #4caf50;
+            background-color: #1a3a1a;
         }
 
         .pantry-item .quantity {
@@ -1088,7 +1152,7 @@
 
         /* Cooking Session */
         .cooking-session {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -1098,12 +1162,13 @@
         .session-code {
             font-family: monospace;
             font-size: 20px;
-            background: #f8f9fa;
+            background: #333;
             padding: 8px 15px;
             border-radius: 6px;
             text-align: center;
             margin: 12px 0;
             letter-spacing: 2px;
+            color: #f0f0f0;
         }
 
         .participants {
@@ -1134,7 +1199,7 @@
 
         /* Nutrition Info */
         .nutrition-info {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -1152,24 +1217,24 @@
             text-align: center;
             padding: 12px;
             border-radius: 6px;
-            background: #f8f9fa;
+            background: #333;
         }
 
         .nutrition-value {
             font-size: 18px;
             font-weight: bold;
-            color: #000;
+            color: #f0f0f0;
         }
 
         .nutrition-label {
             font-size: 12px;
-            color: #666;
+            color: #aaa;
             margin-top: 4px;
         }
 
         /* Progress Tracking */
         .progress-container {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -1178,7 +1243,7 @@
 
         .progress-bar {
             height: 8px;
-            background: #ecf0f1;
+            background: #333;
             border-radius: 4px;
             margin: 12px 0;
             overflow: hidden;
@@ -1200,7 +1265,7 @@
         .progress-step {
             text-align: center;
             font-size: 11px;
-            color: #666;
+            color: #aaa;
         }
 
         .progress-step.active {
@@ -1238,7 +1303,7 @@
         }
 
         .badge.locked {
-            background: #bdc3c7;
+            background: #444;
             color: #666;
         }
 
@@ -1265,7 +1330,7 @@
         /* Cart Notification */
         .cart-notification {
             position: fixed;
-            bottom: 70px; /* Adjusted for mobile nav */
+            bottom: 70px;
             right: 15px;
             background: #ffeb3b;
             color: #000;
@@ -1351,13 +1416,14 @@
         }
 
         .modal {
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             padding: 20px;
             width: 90%;
             max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
+            color: #f0f0f0;
         }
 
         .modal-header {
@@ -1377,7 +1443,7 @@
             border: none;
             font-size: 20px;
             cursor: pointer;
-            color: #666;
+            color: #aaa;
         }
 
         .modal-body {
@@ -1397,18 +1463,21 @@
         .form-input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #333;
             border-radius: 4px;
             font-size: 14px;
+            background: #1a1a1a;
+            color: #f0f0f0;
         }
 
         .form-select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #333;
             border-radius: 4px;
             font-size: 14px;
-            background: white;
+            background: #1a1a1a;
+            color: #f0f0f0;
         }
 
         .modal-footer {
@@ -1426,32 +1495,34 @@
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 6px;
-            background: #f8f9fa;
+            background: #333;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #f0f0f0;
         }
 
         .journey-step.active {
-            background: #fff9e6;
+            background: #333;
             border-left: 4px solid #ffeb3b;
         }
 
         .journey-step.completed {
-            background: #e8f8f1;
-            border-left: 4px solid #27ae60;
+            background: #1a3a1a;
+            border-left: 4px solid #4caf50;
         }
 
         .step-number {
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            background: #ddd;
+            background: #444;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 12px;
             font-weight: bold;
+            color: #f0f0f0;
         }
 
         .journey-step.active .step-number {
@@ -1460,7 +1531,7 @@
         }
 
         .journey-step.completed .step-number {
-            background: #27ae60;
+            background: #4caf50;
             color: white;
         }
 
@@ -1475,7 +1546,7 @@
 
         .step-desc {
             font-size: 13px;
-            color: #666;
+            color: #aaa;
         }
 
         /* Cart Items */
@@ -1488,7 +1559,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #333;
         }
 
         .cart-item-info {
@@ -1502,7 +1573,7 @@
         }
 
         .cart-item-price {
-            color: #666;
+            color: #aaa;
         }
 
         .cart-item-actions {
@@ -1533,7 +1604,7 @@
             display: flex;
             justify-content: space-between;
             padding: 15px 0;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #333;
             font-weight: bold;
         }
 
@@ -1564,8 +1635,8 @@
         }
 
         .assistant-btn.secondary {
-            background-color: white;
-            color: #000;
+            background-color: #333;
+            color: #f0f0f0;
             border: 1px solid #ffeb3b;
         }
 
@@ -1709,23 +1780,29 @@
         <div class="nav-items">
             <div class="nav-item active" onclick="showScreen('screen-1')">
                 <i class="fas fa-home"></i>
-                <span>Home</span>
+                <span data-translate="home">Home</span>
             </div>
             <div class="nav-item" onclick="showScreen('screen-2')">
                 <i class="fas fa-utensils"></i>
-                <span>Recipes</span>
+                <span data-translate="recipes">Recipes</span>
             </div>
             <div class="nav-item" onclick="showScreen('screen-5')">
                 <i class="fas fa-robot"></i>
-                <span>AI Chef</span>
+                <span data-translate="ai_chef">AI Chef</span>
             </div>
             <div class="nav-item" onclick="showScreen('screen-6')">
                 <i class="fas fa-warehouse"></i>
-                <span>Pantry</span>
+                <span data-translate="pantry">Pantry</span>
             </div>
         </div>
         
         <div class="user-actions">
+            <!-- Language Switcher -->
+            <div class="language-switcher" onclick="toggleLanguage()">
+                <div class="language-flag flag-en" id="language-flag">EN</div>
+                <div class="language-text" id="language-text" data-translate="language">English</div>
+            </div>
+            
             <i class="far fa-bell"></i>
             <i class="far fa-user"></i>
             <div class="cart-container" onclick="showCart()">
@@ -1741,19 +1818,19 @@
             <i class="fas fa-times"></i>
         </div>
         <div class="mobile-menu-item" onclick="showScreen('screen-1'); toggleMobileMenu();">
-            <i class="fas fa-home"></i> Home
+            <i class="fas fa-home"></i> <span data-translate="home">Home</span>
         </div>
         <div class="mobile-menu-item" onclick="showScreen('screen-2'); toggleMobileMenu();">
-            <i class="fas fa-utensils"></i> Recipes
+            <i class="fas fa-utensils"></i> <span data-translate="recipes">Recipes</span>
         </div>
         <div class="mobile-menu-item" onclick="showScreen('screen-5'); toggleMobileMenu();">
-            <i class="fas fa-robot"></i> AI Chef
+            <i class="fas fa-robot"></i> <span data-translate="ai_chef">AI Chef</span>
         </div>
         <div class="mobile-menu-item" onclick="showScreen('screen-6'); toggleMobileMenu();">
-            <i class="fas fa-warehouse"></i> Pantry
+            <i class="fas fa-warehouse"></i> <span data-translate="pantry">Pantry</span>
         </div>
         <div class="mobile-menu-item" onclick="toggleMobileMenu();">
-            <i class="fas fa-times"></i> Close
+            <i class="fas fa-times"></i> <span data-translate="close">Close</span>
         </div>
     </div>
     
@@ -1761,19 +1838,19 @@
     <div class="main-content">
         <!-- Screen 1: Dashboard / Entry Point -->
         <div id="screen-1" class="screen active">
-            <h1>What's cooking today?</h1>
-            <p class="subtitle">Discover delicious recipes based on ingredients you have. Save time, reduce food waste, and get inspired with personalized recommendations.</p>
+            <h1 data-translate="whats_cooking">What's cooking today?</h1>
+            <p class="subtitle" data-translate="dashboard_subtitle">Discover delicious recipes based on ingredients you have. Save time, reduce food waste, and get inspired with personalized recommendations.</p>
             
             <div class="dashboard-categories">
                 <div class="category-card" onclick="toggleCategory(this)">
                     <div class="category-icon">
                         <i class="fas fa-utensils"></i>
                     </div>
-                    <div class="category-title">Quick & Easy</div>
+                    <div class="category-title" data-translate="quick_easy">Quick & Easy</div>
                     <div class="subcategories">
-                        <div class="subcategory" onclick="quickStart('quick30')">Under 30 minutes</div>
-                        <div class="subcategory" onclick="quickStart('quick15')">Under 15 minutes</div>
-                        <div class="subcategory" onclick="quickStart('quick5')">5 ingredients or less</div>
+                        <div class="subcategory" onclick="quickStart('quick30')" data-translate="under_30">Under 30 minutes</div>
+                        <div class="subcategory" onclick="quickStart('quick15')" data-translate="under_15">Under 15 minutes</div>
+                        <div class="subcategory" onclick="quickStart('quick5')" data-translate="5_ingredients">5 ingredients or less</div>
                     </div>
                 </div>
                 
@@ -1781,11 +1858,11 @@
                     <div class="category-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
-                    <div class="category-title">Healthy Choices</div>
+                    <div class="category-title" data-translate="healthy_choices">Healthy Choices</div>
                     <div class="subcategories">
-                        <div class="subcategory" onclick="quickStart('lowCal')">Low Calorie</div>
-                        <div class="subcategory" onclick="quickStart('highProtein')">High Protein</div>
-                        <div class="subcategory" onclick="quickStart('lowCarb')">Low Carb</div>
+                        <div class="subcategory" onclick="quickStart('lowCal')" data-translate="low_calorie">Low Calorie</div>
+                        <div class="subcategory" onclick="quickStart('highProtein')" data-translate="high_protein">High Protein</div>
+                        <div class="subcategory" onclick="quickStart('lowCarb')" data-translate="low_carb">Low Carb</div>
                     </div>
                 </div>
                 
@@ -1793,11 +1870,11 @@
                     <div class="category-icon">
                         <i class="fas fa-globe"></i>
                     </div>
-                    <div class="category-title">Cuisine Types</div>
+                    <div class="category-title" data-translate="cuisine_types">Cuisine Types</div>
                     <div class="subcategories">
-                        <div class="subcategory" onclick="quickStart('italian')">Italian</div>
-                        <div class="subcategory" onclick="quickStart('asian')">Asian</div>
-                        <div class="subcategory" onclick="quickStart('mexican')">Mexican</div>
+                        <div class="subcategory" onclick="quickStart('italian')" data-translate="italian">Italian</div>
+                        <div class="subcategory" onclick="quickStart('asian')" data-translate="asian">Asian</div>
+                        <div class="subcategory" onclick="quickStart('mexican')" data-translate="mexican">Mexican</div>
                     </div>
                 </div>
                 
@@ -1805,11 +1882,11 @@
                     <div class="category-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <div class="category-title">Dietary Needs</div>
+                    <div class="category-title" data-translate="dietary_needs">Dietary Needs</div>
                     <div class="subcategories">
-                        <div class="subcategory" onclick="quickStart('vegetarian')">Vegetarian</div>
-                        <div class="subcategory" onclick="quickStart('vegan')">Vegan</div>
-                        <div class="subcategory" onclick="quickStart('glutenFree')">Gluten-Free</div>
+                        <div class="subcategory" onclick="quickStart('vegetarian')" data-translate="vegetarian">Vegetarian</div>
+                        <div class="subcategory" onclick="quickStart('vegan')" data-translate="vegan">Vegan</div>
+                        <div class="subcategory" onclick="quickStart('glutenFree')" data-translate="gluten_free">Gluten-Free</div>
                     </div>
                 </div>
             </div>
@@ -1819,16 +1896,16 @@
                     <div class="entry-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <div class="entry-title">Find Recipes by Ingredients</div>
-                    <div class="entry-desc">Tell us what ingredients you have, and we'll find perfect recipes for you.</div>
+                    <div class="entry-title" data-translate="find_by_ingredients">Find Recipes by Ingredients</div>
+                    <div class="entry-desc" data-translate="find_by_ingredients_desc">Tell us what ingredients you have, and we'll find perfect recipes for you.</div>
                 </div>
                 
                 <div class="entry-card" onclick="showScreen('screen-5')">
                     <div class="entry-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <div class="entry-title">AI Recipe Generator</div>
-                    <div class="entry-desc">Create custom recipes with our AI chef based on your preferences and ingredients.</div>
+                    <div class="entry-title" data-translate="ai_recipe_generator">AI Recipe Generator</div>
+                    <div class="entry-desc" data-translate="ai_recipe_generator_desc">Create custom recipes with our AI chef based on your preferences and ingredients.</div>
                 </div>
             </div>
             
@@ -1838,9 +1915,9 @@
                     <div class="personalized-icon">
                         <i class="fas fa-user-check"></i>
                     </div>
-                    <h2>Personalized Recipe Suggestions</h2>
+                    <h2 data-translate="personalized_suggestions">Personalized Recipe Suggestions</h2>
                 </div>
-                <p class="subtitle">Based on your viewing history and preferences</p>
+                <p class="subtitle" data-translate="personalized_subtitle">Based on your viewing history and preferences</p>
                 
                 <div class="personalized-grid" id="personalized-recipes">
                     <!-- Personalized recipes will be populated by JavaScript -->
@@ -1852,49 +1929,54 @@
         <div id="screen-2" class="screen">
             <div class="action-buttons" style="justify-content: flex-start; margin-bottom: 20px;">
                 <button class="btn btn-primary" onclick="showScreen('screen-1')">
-                    <i class="fas fa-home"></i> Back to Home
+                    <i class="fas fa-home"></i> <span data-translate="back_home">Back to Home</span>
                 </button>
             </div>
             
-            <h1>Select Your Ingredients</h1>
-            <p class="subtitle">Choose ingredients you have available. Our AI will find the perfect recipes for you.</p>
+            <h1 data-translate="select_ingredients">Select Your Ingredients</h1>
+            <p class="subtitle" data-translate="select_ingredients_desc">Choose ingredients you have available. Our AI will find the perfect recipes for you.</p>
             
             <div class="dietary-preferences">
-                <h3>Dietary Preferences</h3>
-                <p>Set your preferences for better recipe matching</p>
+                <h3 data-translate="dietary_preferences">Dietary Preferences</h3>
+                <p data-translate="set_preferences">Set your preferences for better recipe matching</p>
                 <div class="preference-options">
-                    <div class="preference-option" data-diet="vegetarian" onclick="toggleDiet('vegetarian')">Vegetarian</div>
-                    <div class="preference-option" data-diet="vegan" onclick="toggleDiet('vegan')">Vegan</div>
-                    <div class="preference-option" data-diet="glutenFree" onclick="toggleDiet('glutenFree')">Gluten-Free</div>
-                    <div class="preference-option" data-diet="dairyFree" onclick="toggleDiet('dairyFree')">Dairy-Free</div>
-                    <div class="preference-option" data-diet="nutFree" onclick="toggleDiet('nutFree')">Nut-Free</div>
-                    <div class="preference-option" data-diet="lowCarb" onclick="toggleDiet('lowCarb')">Low-Carb</div>
+                    <div class="preference-option" data-diet="vegetarian" onclick="toggleDiet('vegetarian')" data-translate="vegetarian">Vegetarian</div>
+                    <div class="preference-option" data-diet="vegan" onclick="toggleDiet('vegan')" data-translate="vegan">Vegan</div>
+                    <div class="preference-option" data-diet="glutenFree" onclick="toggleDiet('glutenFree')" data-translate="gluten_free">Gluten-Free</div>
+                    <div class="preference-option" data-diet="dairyFree" onclick="toggleDiet('dairyFree')" data-translate="dairy_free">Dairy-Free</div>
+                    <div class="preference-option" data-diet="nutFree" onclick="toggleDiet('nutFree')" data-translate="nut_free">Nut-Free</div>
+                    <div class="preference-option" data-diet="lowCarb" onclick="toggleDiet('lowCarb')" data-translate="low_carb">Low-Carb</div>
                 </div>
+                <!-- Modern Clear button for dietary preferences -->
+                <button class="clear-filter-btn" onclick="clearDietaryPreferences()" style="margin-top: 10px;">
+                    <i class="fas fa-times"></i> <span data-translate="clear_preferences">Clear Preferences</span>
+                </button>
             </div>
             
             <div class="ingredient-section">
-                <h2>Your Selected Ingredients</h2>
-                <p>Add ingredients by clicking on the suggestions below or typing in the search box</p>
+                <h2 data-translate="selected_ingredients">Your Selected Ingredients</h2>
+                <p data-translate="add_ingredients">Add ingredients by clicking on the suggestions below or typing in the search box</p>
                 
                 <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                     <div id="selected-ingredients" class="ingredient-pills">
                         <!-- Selected ingredients will appear here -->
                     </div>
+                    <!-- Modern Clear button for selected ingredients -->
                     <button class="clear-filter-btn" onclick="clearSelectedIngredients()">
-                        <i class="fas fa-times"></i> Clear All
+                        <i class="fas fa-times"></i> <span data-translate="clear_all">Clear All</span>
                     </button>
                 </div>
                 
-                <input type="text" class="search-bar" id="ingredient-search" placeholder="Search for ingredients (e.g., chicken, tomatoes, rice)..." onkeyup="searchIngredients()">
+                <input type="text" class="search-bar" id="ingredient-search" data-translate-placeholder="search_ingredients" placeholder="Search for ingredients (e.g., chicken, tomatoes, rice)..." onkeyup="searchIngredients()">
                 
-                <h3 style="margin-top: 20px;">Popular Ingredients</h3>
+                <h3 style="margin-top: 20px;" data-translate="popular_ingredients">Popular Ingredients</h3>
                 <div class="suggestions-grid" id="suggestions">
                     <!-- Ingredients will be populated by JavaScript -->
                 </div>
                 
                 <div class="action-buttons">
                     <button class="btn btn-primary" id="find-recipes-btn" onclick="findRecipes()" disabled>
-                        <i class="fas fa-utensils"></i> Find Recipes
+                        <i class="fas fa-utensils"></i> <span data-translate="find_recipes">Find Recipes</span>
                     </button>
                 </div>
             </div>
@@ -1904,20 +1986,20 @@
         <div id="screen-3" class="screen">
             <div class="action-buttons" style="justify-content: flex-start; margin-bottom: 20px;">
                 <button class="btn btn-primary" onclick="showScreen('screen-1')">
-                    <i class="fas fa-home"></i> Back to Home
+                    <i class="fas fa-home"></i> <span data-translate="back_home">Back to Home</span>
                 </button>
             </div>
             
-            <h1>Recipe Suggestions</h1>
-            <p class="subtitle">We found <span id="recipe-count">6</span> recipes matching your ingredients and preferences</p>
+            <h1 data-translate="recipe_suggestions">Recipe Suggestions</h1>
+            <p class="subtitle" data-translate="recipe_count">We found <span id="recipe-count">6</span> recipes matching your ingredients and preferences</p>
             
             <div class="filter-options">
-                <div class="filter-pill active" data-filter="all" onclick="applyFilter('all')">All Recipes</div>
-                <div class="filter-pill" data-filter="quick" onclick="applyFilter('quick')">Quick (≤30 min)</div>
-                <div class="filter-pill" data-filter="vegetarian" onclick="applyFilter('vegetarian')">Vegetarian</div>
-                <div class="filter-pill" data-filter="highProtein" onclick="applyFilter('highProtein')">High Protein</div>
-                <div class="filter-pill" data-filter="lowCarb" onclick="applyFilter('lowCarb')">Low Carb</div>
-                <div class="filter-pill" data-filter="dairyFree" onclick="applyFilter('dairyFree')">Dairy Free</div>
+                <div class="filter-pill active" data-filter="all" onclick="applyFilter('all')" data-translate="all_recipes">All Recipes</div>
+                <div class="filter-pill" data-filter="quick" onclick="applyFilter('quick')" data-translate="quick">Quick (≤30 min)</div>
+                <div class="filter-pill" data-filter="vegetarian" onclick="applyFilter('vegetarian')" data-translate="vegetarian">Vegetarian</div>
+                <div class="filter-pill" data-filter="highProtein" onclick="applyFilter('highProtein')" data-translate="high_protein">High Protein</div>
+                <div class="filter-pill" data-filter="lowCarb" onclick="applyFilter('lowCarb')" data-translate="low_carb">Low Carb</div>
+                <div class="filter-pill" data-filter="dairyFree" onclick="applyFilter('dairyFree')" data-translate="dairy_free">Dairy Free</div>
             </div>
             
             <div id="recipe-results" class="recipes-grid">
@@ -1928,10 +2010,10 @@
                 <div class="empty-state-icon">
                     <i class="fas fa-search"></i>
                 </div>
-                <h3>No recipes found</h3>
-                <p>Try adjusting your ingredients or dietary preferences to find more recipes.</p>
+                <h3 data-translate="no_recipes">No recipes found</h3>
+                <p data-translate="no_recipes_desc">Try adjusting your ingredients or dietary preferences to find more recipes.</p>
                 <button class="btn btn-primary" onclick="showScreen('screen-2')" style="margin-top: 20px;">
-                    <i class="fas fa-arrow-left"></i> Back to Ingredients
+                    <i class="fas fa-arrow-left"></i> <span data-translate="back_ingredients">Back to Ingredients</span>
                 </button>
             </div>
         </div>
@@ -1940,25 +2022,24 @@
         <div id="screen-4" class="screen">
             <div class="action-buttons" style="justify-content: flex-start; margin-bottom: 20px;">
                 <button class="btn btn-primary" onclick="showScreen('screen-1')">
-                    <i class="fas fa-home"></i> Back to Home
+                    <i class="fas fa-home"></i> <span data-translate="back_home">Back to Home</span>
                 </button>
                 <button class="btn btn-secondary" onclick="showScreen('screen-3')">
-                    <i class="fas fa-arrow-left"></i> Back to Results
+                    <i class="fas fa-arrow-left"></i> <span data-translate="back_results">Back to Results</span>
                 </button>
             </div>
             
             <div class="recipe-detail">
                 <div>
-                    <div class="recipe-detail-image">
+                    <div class="recipe-detail-image" id="detail-recipe-image">
                         <div class="overlay">
-                            <i class="fas fa-utensils"></i> Cooking Mode
+                            <i class="fas fa-utensils"></i> <span data-translate="cooking_mode">Cooking Mode</span>
                         </div>
-                        Recipe Image
                     </div>
                     
                     <!-- Nutrition Information -->
                     <div class="nutrition-info">
-                        <h3>Nutrition Information</h3>
+                        <h3 data-translate="nutrition_info">Nutrition Information</h3>
                         <div class="nutrition-grid" id="nutrition-info">
                             <!-- Nutrition info will be populated by JavaScript -->
                         </div>
@@ -1966,10 +2047,10 @@
                     
                     <div class="action-buttons">
                         <button class="btn btn-secondary" id="save-recipe-btn" onclick="toggleSaveRecipe()">
-                            <i class="far fa-heart"></i> Save Recipe
+                            <i class="far fa-heart"></i> <span data-translate="save_recipe">Save Recipe</span>
                         </button>
                         <button class="btn btn-primary" onclick="addMissingToCart()">
-                            <i class="fas fa-cart-plus"></i> Add Missing to Cart
+                            <i class="fas fa-cart-plus"></i> <span data-translate="add_missing">Add Missing to Cart</span>
                         </button>
                     </div>
                     
@@ -1982,12 +2063,12 @@
                             <span class="star" data-rating="4">★</span>
                             <span class="star" data-rating="5">★</span>
                         </div>
-                        <div class="rating-text" id="rating-text">Rate this recipe</div>
+                        <div class="rating-text" id="rating-text" data-translate="rate_recipe">Rate this recipe</div>
                     </div>
                     
                     <!-- Cooking Progress -->
                     <div class="progress-container">
-                        <h3>Cooking Progress</h3>
+                        <h3 data-translate="cooking_progress">Cooking Progress</h3>
                         <div class="progress-bar">
                             <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
                         </div>
@@ -1998,24 +2079,24 @@
                         <!-- Assistant Controls - Below Progress -->
                         <div class="assistant-controls">
                             <button class="assistant-btn primary" id="play-pause-btn" onclick="toggleCookingAssistant()">
-                                <i class="fas fa-play"></i> Start Assistant
+                                <i class="fas fa-play"></i> <span data-translate="start_assistant">Start Assistant</span>
                             </button>
                             <button class="assistant-btn secondary" id="stop-cooking-btn" onclick="stopCookingAssistant()" style="display: none;">
-                                <i class="fas fa-stop"></i> Stop Assistant
+                                <i class="fas fa-stop"></i> <span data-translate="stop_assistant">Stop Assistant</span>
                             </button>
                         </div>
                     </div>
                     
                     <!-- Voice Cooking Assistant -->
                     <div class="voice-assistant-container">
-                        <h3>Cooking Assistant</h3>
-                        <p>Let our voice assistant guide you through the cooking process</p>
+                        <h3 data-translate="cooking_assistant">Cooking Assistant</h3>
+                        <p data-translate="assistant_desc">Let our voice assistant guide you through the cooking process</p>
                         
                         <div class="cooking-journey" id="cooking-journey">
                             <!-- Cooking journey steps will be populated by JavaScript -->
                         </div>
                         
-                        <div class="voice-status" id="voice-status">Ready to assist</div>
+                        <div class="voice-status" id="voice-status" data-translate="ready_assist">Ready to assist</div>
                     </div>
                 </div>
                 
@@ -2028,15 +2109,15 @@
                     <p id="detail-recipe-desc">A flavorful and aromatic chicken curry that pairs perfectly with steamed rice. This family-friendly dish combines tender chicken with a rich, spiced sauce that's both comforting and satisfying.</p>
                     
                     <div class="ingredient-section" style="margin-top: 25px;">
-                        <h2>Ingredients</h2>
-                        <p>Items you have are marked with a checkmark</p>
+                        <h2 data-translate="ingredients">Ingredients</h2>
+                        <p data-translate="ingredients_desc">Items you have are marked with a checkmark</p>
                         <ul class="ingredient-list" id="detail-ingredients">
                             <!-- Ingredients will be populated by JavaScript -->
                         </ul>
                     </div>
                     
                     <div class="ingredient-section">
-                        <h2>Preparation</h2>
+                        <h2 data-translate="preparation">Preparation</h2>
                         <ol class="steps-list" id="detail-steps">
                             <!-- Steps will be populated by JavaScript -->
                         </ol>
@@ -2046,11 +2127,11 @@
             
             <!-- Video Tutorial Section -->
             <div class="video-recommendations">
-                <h2>Video Tutorial</h2>
-                <p class="subtitle">Watch how to make this recipe</p>
+                <h2 data-translate="video_tutorial">Video Tutorial</h2>
+                <p class="subtitle" data-translate="watch_how">Watch how to make this recipe</p>
                 
                 <div class="video-card">
-                    <div class="video-thumbnail">
+                    <div class="video-thumbnail" id="video-thumbnail">
                         <i class="fas fa-play play-icon"></i>
                         Video Thumbnail
                     </div>
@@ -2065,8 +2146,8 @@
             </div>
             
             <div class="ai-features">
-                <h2>You Might Also Like</h2>
-                <p class="subtitle">Based on this recipe and your preferences</p>
+                <h2 data-translate="you_might_like">You Might Also Like</h2>
+                <p class="subtitle" data-translate="based_on_preferences">Based on this recipe and your preferences</p>
                 
                 <div class="recipes-grid" id="related-recipes">
                     <!-- Related recipes will be populated by JavaScript -->
@@ -2078,77 +2159,77 @@
         <div id="screen-5" class="screen">
             <div class="action-buttons" style="justify-content: flex-start; margin-bottom: 20px;">
                 <button class="btn btn-primary" onclick="showScreen('screen-1')">
-                    <i class="fas fa-home"></i> Back to Home
+                    <i class="fas fa-home"></i> <span data-translate="back_home">Back to Home</span>
                 </button>
             </div>
             
-            <h1>AI Recipe Generator</h1>
-            <p class="subtitle">Describe what you want to cook, and our AI chef will create a custom recipe for you</p>
+            <h1 data-translate="ai_recipe_generator">AI Recipe Generator</h1>
+            <p class="subtitle" data-translate="ai_generator_desc">Describe what you want to cook, and our AI chef will create a custom recipe for you</p>
             
             <div class="ai-generator">
-                <h2>Create Your Custom Recipe</h2>
-                <p>Tell our AI chef about your preferences, ingredients, or dietary needs</p>
+                <h2 data-translate="create_custom_recipe">Create Your Custom Recipe</h2>
+                <p data-translate="tell_ai_chef">Tell our AI chef about your preferences, ingredients, or dietary needs</p>
                 
-                <textarea class="ai-input" id="ai-prompt" placeholder="E.g., 'A quick vegetarian dinner using tomatoes, onions, and rice' or 'A healthy low-carb lunch with chicken and vegetables'"></textarea>
+                <textarea class="ai-input" id="ai-prompt" data-translate-placeholder="ai_prompt_placeholder" placeholder="E.g., 'A quick vegetarian dinner using tomatoes, onions, and rice' or 'A healthy low-carb lunch with chicken and vegetables'"></textarea>
                 
                 <div class="action-buttons">
                     <button class="btn btn-primary" onclick="generateAIRecipe()">
-                        <i class="fas fa-robot"></i> Generate Recipe
+                        <i class="fas fa-robot"></i> <span data-translate="generate_recipe">Generate Recipe</span>
                     </button>
                 </div>
                 
                 <div class="ai-result" id="ai-result">
-                    <h3>Your Custom Recipe</h3>
+                    <h3 data-translate="your_custom_recipe">Your Custom Recipe</h3>
                     <div id="ai-recipe-content">
                         <!-- AI-generated recipe will appear here -->
                     </div>
                     
                     <div class="action-buttons">
                         <button class="btn btn-secondary" onclick="saveAIRecipe()">
-                            <i class="fas fa-save"></i> Save Recipe
+                            <i class="fas fa-save"></i> <span data-translate="save_recipe">Save Recipe</span>
                         </button>
                         <button class="btn btn-primary" onclick="addAIIngredientsToCart()">
-                            <i class="fas fa-cart-plus"></i> Add Ingredients to Cart
+                            <i class="fas fa-cart-plus"></i> <span data-translate="add_ingredients_cart">Add Ingredients to Cart</span>
                         </button>
                     </div>
                 </div>
             </div>
             
             <div class="ai-features">
-                <h2>AI Chef Capabilities</h2>
-                <p class="subtitle">Our AI chef can help you with various cooking needs</p>
+                <h2 data-translate="ai_chef_capabilities">AI Chef Capabilities</h2>
+                <p class="subtitle" data-translate="ai_chef_help">Our AI chef can help you with various cooking needs</p>
                 
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-lightbulb"></i>
                         </div>
-                        <div class="feature-title">Creative Recipes</div>
-                        <div class="feature-desc">Generate unique recipes based on your available ingredients and preferences.</div>
+                        <div class="feature-title" data-translate="creative_recipes">Creative Recipes</div>
+                        <div class="feature-desc" data-translate="creative_recipes_desc">Generate unique recipes based on your available ingredients and preferences.</div>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-utensil-spoon"></i>
                         </div>
-                        <div class="feature-title">Ingredient Substitutions</div>
-                        <div class="feature-desc">Get suggestions for ingredient swaps based on what you have.</div>
+                        <div class="feature-title" data-translate="ingredient_substitutions">Ingredient Substitutions</div>
+                        <div class="feature-desc" data-translate="ingredient_substitutions_desc">Get suggestions for ingredient swaps based on what you have.</div>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-user-md"></i>
                         </div>
-                        <div class="feature-title">Dietary Adaptations</div>
-                        <div class="feature-desc">Transform any recipe to fit your dietary restrictions.</div>
+                        <div class="feature-title" data-translate="dietary_adaptations">Dietary Adaptations</div>
+                        <div class="feature-desc" data-translate="dietary_adaptations_desc">Transform any recipe to fit your dietary restrictions.</div>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-stopwatch"></i>
                         </div>
-                        <div class="feature-title">Time Optimization</div>
-                        <div class="feature-desc">Get recipes tailored to your available cooking time.</div>
+                        <div class="feature-title" data-translate="time_optimization">Time Optimization</div>
+                        <div class="feature-desc" data-translate="time_optimization_desc">Get recipes tailored to your available cooking time.</div>
                     </div>
                 </div>
             </div>
@@ -2158,23 +2239,23 @@
         <div id="screen-6" class="screen">
             <div class="action-buttons" style="justify-content: flex-start; margin-bottom: 20px;">
                 <button class="btn btn-primary" onclick="showScreen('screen-1')">
-                    <i class="fas fa-home"></i> Back to Home
+                    <i class="fas fa-home"></i> <span data-translate="back_home">Back to Home</span>
                 </button>
             </div>
             
-            <h1>Smart Pantry</h1>
-            <p class="subtitle">Manage your ingredients, track expiration dates, and reduce food waste</p>
+            <h1 data-translate="smart_pantry">Smart Pantry</h1>
+            <p class="subtitle" data-translate="pantry_desc">Manage your ingredients, track expiration dates, and reduce food waste</p>
             
             <div class="pantry-section">
-                <h2>Your Pantry Items</h2>
-                <p>Track what you have and get notified when items are running low or expiring soon</p>
+                <h2 data-translate="pantry_items">Your Pantry Items</h2>
+                <p data-translate="pantry_track">Track what you have and get notified when items are running low or expiring soon</p>
                 
                 <div class="action-buttons">
                     <button class="btn btn-primary" onclick="scanReceipt()">
-                        <i class="fas fa-receipt"></i> Scan Receipt
+                        <i class="fas fa-receipt"></i> <span data-translate="scan_receipt">Scan Receipt</span>
                     </button>
                     <button class="btn btn-primary" onclick="showAddItemModal()">
-                        <i class="fas fa-plus"></i> Add Item
+                        <i class="fas fa-plus"></i> <span data-translate="add_item">Add Item</span>
                     </button>
                 </div>
                 
@@ -2184,8 +2265,8 @@
             </div>
             
             <div class="ai-features">
-                <h2>Recipes Using Your Pantry Items</h2>
-                <p class="subtitle">Cook with what you already have</p>
+                <h2 data-translate="recipes_pantry">Recipes Using Your Pantry Items</h2>
+                <p class="subtitle" data-translate="cook_with_pantry">Cook with what you already have</p>
                 
                 <div class="recipes-grid" id="pantry-recipes">
                     <!-- Recipes based on pantry items will be populated by JavaScript -->
@@ -2193,8 +2274,8 @@
             </div>
             
             <div class="progress-container">
-                <h2>Pantry Insights</h2>
-                <p>Your food waste reduction progress</p>
+                <h2 data-translate="pantry_insights">Pantry Insights</h2>
+                <p data-translate="waste_reduction">Your food waste reduction progress</p>
                 
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 65%"></div>
@@ -2203,89 +2284,20 @@
                 <div class="achievements">
                     <div class="badge">
                         <i class="fas fa-leaf"></i>
-                        <div class="badge-tooltip">Eco Warrior - Saved 5kg of food</div>
+                        <div class="badge-tooltip" data-translate="eco_warrior">Eco Warrior - Saved 5kg of food</div>
                     </div>
                     <div class="badge">
                         <i class="fas fa-utensils"></i>
-                        <div class="badge-tooltip">Meal Planner - Planned 10 meals</div>
+                        <div class="badge-tooltip" data-translate="meal_planner">Meal Planner - Planned 10 meals</div>
                     </div>
                     <div class="badge locked">
                         <i class="fas fa-recycle"></i>
-                        <div class="badge-tooltip">Zero Waste - Save 10kg of food</div>
+                        <div class="badge-tooltip" data-translate="zero_waste">Zero Waste - Save 10kg of food</div>
                     </div>
                     <div class="badge">
                         <i class="fas fa-clock"></i>
-                        <div class="badge-tooltip">Quick Cook - 5 meals under 30 mins</div>
+                        <div class="badge-tooltip" data-translate="quick_cook">Quick Cook - 5 meals under 30 mins</div>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Screen 7: Cooking Session -->
-        <div id="screen-7" class="screen">
-            <div class="action-buttons" style="justify-content: flex-start; margin-bottom: 20px;">
-                <button class="btn btn-primary" onclick="showScreen('screen-1')">
-                    <i class="fas fa-home"></i> Back to Home
-                </button>
-            </div>
-            
-            <h1>Cook Together</h1>
-            <p class="subtitle">Share this cooking session with friends and family</p>
-            
-            <div class="cooking-session">
-                <h2>Active Cooking Session</h2>
-                <p>Share the code below with others to join your cooking session</p>
-                
-                <div class="session-code" id="session-code">CH4LD4L</div>
-                
-                <div class="participants">
-                    <div class="participant">Y</div>
-                    <div class="participant">A</div>
-                    <div class="participant">+2</div>
-                </div>
-                
-                <div class="progress-container">
-                    <h3>Session Progress</h3>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 30%"></div>
-                    </div>
-                    <div class="progress-steps">
-                        <div class="progress-step active">Prep</div>
-                        <div class="progress-step">Cooking</div>
-                        <div class="progress-step">Plating</div>
-                        <div class="progress-step">Enjoy!</div>
-                    </div>
-                </div>
-                
-                <div class="session-controls">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-share-alt"></i> Share Session
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-video"></i> Start Video Call
-                    </button>
-                </div>
-            </div>
-            
-            <div class="ingredient-section">
-                <h2>Synchronized Cooking Steps</h2>
-                <p>Everyone follows the same steps at the same time</p>
-                
-                <ol class="steps-list">
-                    <li class="step-item">Chop onions and garlic (Current Step)</li>
-                    <li class="step-item">Heat oil in a pan</li>
-                    <li class="step-item">Sauté onions until golden</li>
-                    <li class="step-item">Add chicken and cook until browned</li>
-                    <li class="step-item">Add spices and tomatoes</li>
-                </ol>
-                
-                <div class="action-buttons">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-step-forward"></i> Next Step
-                    </button>
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-pause"></i> Pause Session
-                    </button>
                 </div>
             </div>
         </div>
@@ -2294,39 +2306,39 @@
     <!-- Cart Notification -->
     <div id="cart-notification" class="cart-notification">
         <i class="fas fa-check-circle"></i>
-        <span>Items added to your cart successfully!</span>
+        <span data-translate="items_added">Items added to your cart successfully!</span>
     </div>
 
     <!-- Add Item Modal -->
     <div class="modal-overlay" id="add-item-modal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">Add Item to Pantry</div>
+                <div class="modal-title" data-translate="add_item_pantry">Add Item to Pantry</div>
                 <button class="close-modal" onclick="hideAddItemModal()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="form-label">Item Name</label>
-                    <input type="text" class="form-input" id="item-name" placeholder="e.g., Tomatoes">
+                    <label class="form-label" data-translate="item_name">Item Name</label>
+                    <input type="text" class="form-input" id="item-name" data-translate-placeholder="item_name_placeholder" placeholder="e.g., Tomatoes">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Quantity</label>
+                    <label class="form-label" data-translate="quantity">Quantity</label>
                     <input type="number" class="form-input" id="item-quantity" placeholder="e.g., 5" min="1" value="1">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Status</label>
+                    <label class="form-label" data-translate="status">Status</label>
                     <select class="form-select" id="item-status">
-                        <option value="full">Full</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
+                        <option value="full" data-translate="full">Full</option>
+                        <option value="medium" data-translate="medium">Medium</option>
+                        <option value="low" data-translate="low">Low</option>
                     </select>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="hideAddItemModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="addPantryItem()">Add Item</button>
+                <button class="btn btn-secondary" onclick="hideAddItemModal()" data-translate="cancel">Cancel</button>
+                <button class="btn btn-primary" onclick="addPantryItem()" data-translate="add_item">Add Item</button>
             </div>
         </div>
     </div>
@@ -2335,7 +2347,7 @@
     <div class="modal-overlay" id="cart-modal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">Your Shopping Cart</div>
+                <div class="modal-title" data-translate="shopping_cart">Your Shopping Cart</div>
                 <button class="close-modal" onclick="hideCart()">
                     <i class="fas fa-times"></i>
                 </button>
@@ -2345,23 +2357,294 @@
                     <!-- Cart items will be populated by JavaScript -->
                 </div>
                 <div class="cart-total">
-                    <span>Total:</span>
-                    <span id="cart-total">$0.00</span>
+                    <span data-translate="total">Total:</span>
+                    <!-- Updated to use Bangladeshi Taka symbol -->
+                    <span id="cart-total">৳ 0.00</span>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="hideCart()">Continue Shopping</button>
-                <button class="btn btn-primary">Checkout</button>
+                <button class="btn btn-secondary" onclick="hideCart()" data-translate="continue_shopping">Continue Shopping</button>
+                <button class="btn btn-primary" data-translate="checkout">Checkout</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Language support
+        let currentLanguage = 'en';
+        
+        const translations = {
+            en: {
+                // Navigation
+                home: "Home",
+                recipes: "Recipes",
+                ai_chef: "AI Chef",
+                pantry: "Pantry",
+                close: "Close",
+                language: "English",
+                
+                // Screen 1
+                whats_cooking: "What's cooking today?",
+                dashboard_subtitle: "Discover delicious recipes based on ingredients you have. Save time, reduce food waste, and get inspired with personalized recommendations.",
+                quick_easy: "Quick & Easy",
+                under_30: "Under 30 minutes",
+                under_15: "Under 15 minutes",
+                "5_ingredients": "5 ingredients or less",
+                healthy_choices: "Healthy Choices",
+                low_calorie: "Low Calorie",
+                high_protein: "High Protein",
+                low_carb: "Low Carb",
+                cuisine_types: "Cuisine Types",
+                italian: "Italian",
+                asian: "Asian",
+                mexican: "Mexican",
+                dietary_needs: "Dietary Needs",
+                vegetarian: "Vegetarian",
+                vegan: "Vegan",
+                gluten_free: "Gluten-Free",
+                find_by_ingredients: "Find Recipes by Ingredients",
+                find_by_ingredients_desc: "Tell us what ingredients you have, and we'll find perfect recipes for you.",
+                ai_recipe_generator: "AI Recipe Generator",
+                ai_recipe_generator_desc: "Create custom recipes with our AI chef based on your preferences and ingredients.",
+                personalized_suggestions: "Personalized Recipe Suggestions",
+                personalized_subtitle: "Based on your viewing history and preferences",
+                
+                // Screen 2
+                select_ingredients: "Select Your Ingredients",
+                select_ingredients_desc: "Choose ingredients you have available. Our AI will find the perfect recipes for you.",
+                dietary_preferences: "Dietary Preferences",
+                set_preferences: "Set your preferences for better recipe matching",
+                dairy_free: "Dairy-Free",
+                nut_free: "Nut-Free",
+                clear_preferences: "Clear Preferences",
+                selected_ingredients: "Your Selected Ingredients",
+                add_ingredients: "Add ingredients by clicking on the suggestions below or typing in the search box",
+                clear_all: "Clear All",
+                search_ingredients: "Search for ingredients (e.g., chicken, tomatoes, rice)...",
+                popular_ingredients: "Popular Ingredients",
+                find_recipes: "Find Recipes",
+                back_home: "Back to Home",
+                
+                // Screen 3
+                recipe_suggestions: "Recipe Suggestions",
+                recipe_count: "We found recipes matching your ingredients and preferences",
+                all_recipes: "All Recipes",
+                quick: "Quick (≤30 min)",
+                no_recipes: "No recipes found",
+                no_recipes_desc: "Try adjusting your ingredients or dietary preferences to find more recipes.",
+                back_ingredients: "Back to Ingredients",
+                
+                // Screen 4
+                back_results: "Back to Results",
+                cooking_mode: "Cooking Mode",
+                nutrition_info: "Nutrition Information",
+                save_recipe: "Save Recipe",
+                add_missing: "Add Missing to Cart",
+                rate_recipe: "Rate this recipe",
+                cooking_progress: "Cooking Progress",
+                start_assistant: "Start Assistant",
+                stop_assistant: "Stop Assistant",
+                cooking_assistant: "Cooking Assistant",
+                assistant_desc: "Let our voice assistant guide you through the cooking process",
+                ready_assist: "Ready to assist",
+                ingredients: "Ingredients",
+                ingredients_desc: "Items you have are marked with a checkmark",
+                preparation: "Preparation",
+                video_tutorial: "Video Tutorial",
+                watch_how: "Watch how to make this recipe",
+                you_might_like: "You Might Also Like",
+                based_on_preferences: "Based on this recipe and your preferences",
+                
+                // Screen 5
+                ai_generator_desc: "Describe what you want to cook, and our AI chef will create a custom recipe for you",
+                create_custom_recipe: "Create Your Custom Recipe",
+                tell_ai_chef: "Tell our AI chef about your preferences, ingredients, or dietary needs",
+                ai_prompt_placeholder: "E.g., 'A quick vegetarian dinner using tomatoes, onions, and rice' or 'A healthy low-carb lunch with chicken and vegetables'",
+                generate_recipe: "Generate Recipe",
+                your_custom_recipe: "Your Custom Recipe",
+                add_ingredients_cart: "Add Ingredients to Cart",
+                ai_chef_capabilities: "AI Chef Capabilities",
+                ai_chef_help: "Our AI chef can help you with various cooking needs",
+                creative_recipes: "Creative Recipes",
+                creative_recipes_desc: "Generate unique recipes based on your available ingredients and preferences.",
+                ingredient_substitutions: "Ingredient Substitutions",
+                ingredient_substitutions_desc: "Get suggestions for ingredient swaps based on what you have.",
+                dietary_adaptations: "Dietary Adaptations",
+                dietary_adaptations_desc: "Transform any recipe to fit your dietary restrictions.",
+                time_optimization: "Time Optimization",
+                time_optimization_desc: "Get recipes tailored to your available cooking time.",
+                
+                // Screen 6
+                smart_pantry: "Smart Pantry",
+                pantry_desc: "Manage your ingredients, track expiration dates, and reduce food waste",
+                pantry_items: "Your Pantry Items",
+                pantry_track: "Track what you have and get notified when items are running low or expiring soon",
+                scan_receipt: "Scan Receipt",
+                add_item: "Add Item",
+                recipes_pantry: "Recipes Using Your Pantry Items",
+                cook_with_pantry: "Cook with what you already have",
+                pantry_insights: "Pantry Insights",
+                waste_reduction: "Your food waste reduction progress",
+                eco_warrior: "Eco Warrior - Saved 5kg of food",
+                meal_planner: "Meal Planner - Planned 10 meals",
+                zero_waste: "Zero Waste - Save 10kg of food",
+                quick_cook: "Quick Cook - 5 meals under 30 mins",
+                
+                // Modals
+                add_item_pantry: "Add Item to Pantry",
+                item_name: "Item Name",
+                item_name_placeholder: "e.g., Tomatoes",
+                quantity: "Quantity",
+                status: "Status",
+                full: "Full",
+                medium: "Medium",
+                low: "Low",
+                cancel: "Cancel",
+                shopping_cart: "Your Shopping Cart",
+                total: "Total",
+                continue_shopping: "Continue Shopping",
+                checkout: "Checkout",
+                items_added: "Items added to your cart successfully!"
+            },
+            bn: {
+                // Navigation
+                home: "হোম",
+                recipes: "রেসিপি",
+                ai_chef: "এআই শেফ",
+                pantry: "প্যান্ট্রি",
+                close: "বন্ধ করুন",
+                language: "বাংলা",
+                
+                // Screen 1
+                whats_cooking: "আজ কি রান্না করবেন?",
+                dashboard_subtitle: "আপনার কাছে থাকা উপাদানগুলির ভিত্তিতে সুস্বাদু রেসিপি আবিষ্কার করুন। সময় বাঁচান, খাদ্য নষ্ট কম করুন এবং ব্যক্তিগত সুপারিশগুলির মাধ্যমে অনুপ্রাণিত হন।",
+                quick_easy: "দ্রুত ও সহজ",
+                under_30: "৩০ মিনিটের কম",
+                under_15: "১৫ মিনিটের কম",
+                "5_ingredients": "৫টি বা কম উপাদান",
+                healthy_choices: "স্বাস্থ্যকর পছন্দ",
+                low_calorie: "কম ক্যালোরি",
+                high_protein: "উচ্চ প্রোটিন",
+                low_carb: "লো কার্ব",
+                cuisine_types: "রান্নার ধরন",
+                italian: "ইতালিয়ান",
+                asian: "এশিয়ান",
+                mexican: "মেক্সিকান",
+                dietary_needs: "ডায়েটারি প্রয়োজন",
+                vegetarian: "শাকাহারী",
+                vegan: "ভেগান",
+                gluten_free: "গ্লুটেন-মুক্ত",
+                find_by_ingredients: "উপাদান দিয়ে রেসিপি খুঁজুন",
+                find_by_ingredients_desc: "আপনার কাছে কি উপাদান আছে তা বলুন, আমরা আপনার জন্য উপযুক্ত রেসিপি খুঁজে দেব।",
+                ai_recipe_generator: "এআই রেসিপি জেনারেটর",
+                ai_recipe_generator_desc: "আপনার পছন্দ এবং উপাদানগুলির ভিত্তিতে আমাদের এআই শেফ কাস্টম রেসিপি তৈরি করুন।",
+                personalized_suggestions: "ব্যক্তিগতকৃত রেসিপি সুপারিশ",
+                personalized_subtitle: "আপনার দেখা ইতিহাস এবং পছন্দগুলির উপর ভিত্তি করে",
+                
+                // Screen 2
+                select_ingredients: "আপনার উপাদান নির্বাচন করুন",
+                select_ingredients_desc: "আপনার কাছে থাকা উপাদানগুলি বেছে নিন। আমাদের এআই আপনার জন্য নিখুঁত রেসিপি খুঁজে পাবে।",
+                dietary_preferences: "ডায়েটারি পছন্দ",
+                set_preferences: "ভালো রেসিপি ম্যাচিংয়ের জন্য আপনার পছন্দ সেট করুন",
+                dairy_free: "ডেইরি-মুক্ত",
+                nut_free: "বাদাম-মুক্ত",
+                clear_preferences: "পছন্দ পরিষ্কার করুন",
+                selected_ingredients: "আপনার নির্বাচিত উপাদান",
+                add_ingredients: "নীচের পরামর্শগুলিতে ক্লিক করে বা সার্চ বক্সে টাইপ করে উপাদান যোগ করুন",
+                clear_all: "সব পরিষ্কার করুন",
+                search_ingredients: "উপাদান অনুসন্ধান করুন (যেমন, মুরগি, টমেটো, চাল)...",
+                popular_ingredients: "জনপ্রিয় উপাদান",
+                find_recipes: "রেসিপি খুঁজুন",
+                back_home: "হোমে ফিরে যান",
+                
+                // Screen 3
+                recipe_suggestions: "রেসিপি সুপারিশ",
+                recipe_count: "আমরা আপনার উপাদান এবং পছন্দগুলির সাথে মিলে যাওয়া রেসিপি পেয়েছি",
+                all_recipes: "সব রেসিপি",
+                quick: "দ্রুত (≤৩০ মিনিট)",
+                no_recipes: "কোন রেসিপি পাওয়া যায়নি",
+                no_recipes_desc: "আরো রেসিপি খুঁজে পেতে আপনার উপাদান বা ডায়েটারি পছন্দ সামঞ্জস্য করুন।",
+                back_ingredients: "উপাদানে ফিরে যান",
+                
+                // Screen 4
+                back_results: "ফলাফলে ফিরে যান",
+                cooking_mode: "রান্নার মোড",
+                nutrition_info: "পুষ্টি তথ্য",
+                save_recipe: "রেসিপি সংরক্ষণ করুন",
+                add_missing: "অনুপস্থিতগুলি কার্টে যোগ করুন",
+                rate_recipe: "এই রেসিপি রেট করুন",
+                cooking_progress: "রান্নার অগ্রগতি",
+                start_assistant: "অ্যাসিস্টেন্ট শুরু করুন",
+                stop_assistant: "অ্যাসিস্টেন্ট বন্ধ করুন",
+                cooking_assistant: "রান্নার সহায়ক",
+                assistant_desc: "আমাদের ভয়েস অ্যাসিস্টেন্ট আপনাকে রান্নার প্রক্রিয়ার মাধ্যমে নির্দেশনা দেবে",
+                ready_assist: "সহায়তার জন্য প্রস্তুত",
+                ingredients: "উপাদানসমূহ",
+                ingredients_desc: "আপনার কাছে থাকা আইটেমগুলি চেকমার্ক দিয়ে চিহ্নিত করা হয়েছে",
+                preparation: "প্রস্তুতি",
+                video_tutorial: "ভিডিও টিউটোরিয়াল",
+                watch_how: "এই রেসিপিটি কীভাবে তৈরি করতে হয় তা দেখুন",
+                you_might_like: "আপনারও পছন্দ হতে পারে",
+                based_on_preferences: "এই রেসিপি এবং আপনার পছন্দগুলির উপর ভিত্তি করে",
+                
+                // Screen 5
+                ai_generator_desc: "বর্ণনা করুন আপনি কী রান্না করতে চান, এবং আমাদের এআই শেফ একটি কাস্টম রেসিপি তৈরি করবে",
+                create_custom_recipe: "আপনার কাস্টম রেসিপি তৈরি করুন",
+                tell_ai_chef: "আপনার পছন্দ, উপাদান বা ডায়েটারি প্রয়োজনীয়তা সম্পর্কে আমাদের এআই শেফকে বলুন",
+                ai_prompt_placeholder: "যেমন, 'টমেটো, পেঁয়াজ এবং চাল ব্যবহার করে একটি দ্রুত নিরামিষ রাতের খাবার' বা 'মুরগি এবং শাকসবজি দিয়ে একটি স্বাস্থ্যকর লো-কার্ব লাঞ্চ'",
+                generate_recipe: "রেসিপি তৈরি করুন",
+                your_custom_recipe: "আপনার কাস্টম রেসিপি",
+                add_ingredients_cart: "উপাদানগুলি কার্টে যোগ করুন",
+                ai_chef_capabilities: "এআই শেফের ক্ষমতা",
+                ai_chef_help: "আমাদের এআই শেফ বিভিন্ন রান্নার প্রয়োজনে আপনাকে সাহায্য করতে পারে",
+                creative_recipes: "সৃজনশীল রেসিপি",
+                creative_recipes_desc: "আপনার উপলব্ধ উপাদান এবং পছন্দগুলির উপর ভিত্তি করে অনন্য রেসিপি তৈরি করুন।",
+                ingredient_substitutions: "উপাদান প্রতিস্থাপন",
+                ingredient_substitutions_desc: "আপনার যা আছে তার উপর ভিত্তি করে উপাদান সোয়াপের পরামর্শ পান।",
+                dietary_adaptations: "ডায়েটারি অভিযোজন",
+                dietary_adaptations_desc: "যেকোনো রেসিপিকে আপনার ডায়েটারি বিধিনিষেধের সাথে মানানসই করুন।",
+                time_optimization: "সময় অপ্টিমাইজেশন",
+                time_optimization_desc: "আপনার উপলব্ধ রান্নার সময়ের জন্য উপযুক্ত রেসিপি পান।",
+                
+                // Screen 6
+                smart_pantry: "স্মার্ট প্যান্ট্রি",
+                pantry_desc: "আপনার উপাদানগুলি পরিচালনা করুন, মেয়াদ শেষ হওয়ার তারিখ ট্র্যাক করুন এবং খাদ্য নষ্ট কম করুন",
+                pantry_items: "আপনার প্যান্ট্রি আইটেম",
+                pantry_track: "আপনার যা আছে তা ট্র্যাক করুন এবং আইটেম কমে গেলে বা শীঘ্রই মেয়াদ শেষ হলে বিজ্ঞপ্তি পান",
+                scan_receipt: "রসিদ স্ক্যান করুন",
+                add_item: "আইটেম যোগ করুন",
+                recipes_pantry: "আপনার প্যান্ট্রি আইটেম ব্যবহার করে রেসিপি",
+                cook_with_pantry: "আপনার যা আছে তা দিয়ে রান্না করুন",
+                pantry_insights: "প্যান্ট্রি অন্তর্দৃষ্টি",
+                waste_reduction: "আপনার খাদ্য বর্জ্য হ্রাস অগ্রগতি",
+                eco_warrior: "ইকো ওয়ারিয়র - ৫ কেজি খাদ্য সংরক্ষণ করেছেন",
+                meal_planner: "মিল প্ল্যানার - ১০টি খাবার পরিকল্পনা করেছেন",
+                zero_waste: "জিরো ওয়েস্ট - ১০ কেজি খাদ্য সংরক্ষণ করুন",
+                quick_cook: "দ্রুত রান্না - ৫টি খাবার ৩০ মিনিটের কম",
+                
+                // Modals
+                add_item_pantry: "প্যান্ট্রিতে আইটেম যোগ করুন",
+                item_name: "আইটেমের নাম",
+                item_name_placeholder: "যেমন, টমেটো",
+                quantity: "পরিমাণ",
+                status: "স্ট্যাটাস",
+                full: "পূর্ণ",
+                medium: "মধ্যম",
+                low: "কম",
+                cancel: "বাতিল",
+                shopping_cart: "আপনার শপিং কার্ট",
+                total: "মোট",
+                continue_shopping: "শপিং চালিয়ে যান",
+                checkout: "চেকআউট",
+                items_added: "আইটেমগুলি সফলভাবে আপনার কার্টে যোগ করা হয়েছে!"
+            }
+        };
+
         // User preferences object
         const userPreferences = {
-            viewedRecipes: [], // Array to store recipe IDs of viewed recipes
-            ratings: {}, // Object to store user ratings (key: recipe ID, value: rating)
-            pantry: [] // Array to store pantry items
+            viewedRecipes: [],
+            ratings: {},
+            pantry: []
         };
 
         // Dietary restrictions data
@@ -2417,7 +2700,7 @@
             { name: "Almonds", icon: "fas fa-seedling" }
         ];
 
-        // Recipe database
+        // Recipe database - UPDATED WITH IMAGES
         const recipes = [
             {
                 id: 1,
@@ -2465,7 +2748,8 @@
                     duration: "10:25",
                     views: "15K",
                     likes: "1.2K"
-                }
+                },
+                image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1071&q=80"
             },
             {
                 id: 2,
@@ -2505,7 +2789,92 @@
                     duration: "5:10",
                     views: "8.2K",
                     likes: "850"
-                }
+                },
+                image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1084&q=80"
+            },
+            {
+                id: 3,
+                title: "Vegetable Stir Fry",
+                description: "A quick and healthy vegetable stir fry with a savory sauce. Perfect for a weeknight dinner.",
+                ingredients: [
+                    { name: "Bell Peppers (2)", has: true },
+                    { name: "Carrots (2)", has: true },
+                    { name: "Broccoli (1 head)", has: false },
+                    { name: "Soy Sauce (3 tbsp)", has: false },
+                    { name: "Garlic (2 cloves)", has: true },
+                    { name: "Ginger (1 inch)", has: false },
+                    { name: "Sesame Oil (1 tbsp)", has: false },
+                    { name: "Rice (2 cups)", has: true }
+                ],
+                steps: [
+                    "Chop all vegetables into bite-sized pieces.",
+                    "Heat sesame oil in a wok or large pan over high heat.",
+                    "Add minced garlic and ginger, stir for 30 seconds.",
+                    "Add vegetables and stir fry for 5-7 minutes until crisp-tender.",
+                    "Add soy sauce and stir to coat vegetables.",
+                    "Serve hot over steamed rice."
+                ],
+                cookTime: 20,
+                difficulty: "Easy",
+                servings: 3,
+                matchScore: 7,
+                dietaryTags: ["vegetarian", "vegan", "quick"],
+                incompatibleWith: [],
+                nutrition: {
+                    calories: 180,
+                    protein: 6,
+                    carbs: 30,
+                    fat: 5
+                },
+                video: {
+                    title: "Quick Vegetable Stir Fry",
+                    duration: "8:15",
+                    views: "12K",
+                    likes: "1.1K"
+                },
+                image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80"
+            },
+            {
+                id: 4,
+                title: "Classic Beef Burger",
+                description: "Juicy beef burgers with all the classic toppings. Perfect for a weekend barbecue or casual dinner.",
+                ingredients: [
+                    { name: "Ground Beef (500g)", has: false },
+                    { name: "Bread (4 slices)", has: true },
+                    { name: "Cheese (4 slices)", has: false },
+                    { name: "Tomatoes (1)", has: true },
+                    { name: "Onions (1)", has: true },
+                    { name: "Lettuce (4 leaves)", has: false },
+                    { name: "Ketchup (to taste)", has: false },
+                    { name: "Mustard (to taste)", has: false }
+                ],
+                steps: [
+                    "Form ground beef into 4 patties, season with salt and pepper.",
+                    "Grill or pan-fry burgers for 4-5 minutes per side for medium.",
+                    "Add cheese slices during the last minute of cooking.",
+                    "Toast bread slices lightly.",
+                    "Assemble burgers with lettuce, tomato, onion, and condiments.",
+                    "Serve immediately with your favorite sides."
+                ],
+                cookTime: 25,
+                difficulty: "Easy",
+                servings: 4,
+                matchScore: 6,
+                dietaryTags: ["highProtein"],
+                incompatibleWith: ["vegetarian", "vegan"],
+                nutrition: {
+                    calories: 550,
+                    protein: 30,
+                    carbs: 35,
+                    fat: 28
+                },
+                video: {
+                    title: "Perfect Burger Every Time",
+                    duration: "12:30",
+                    views: "25K",
+                    likes: "2.3K"
+                },
+                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=699&q=80"
             }
         ];
 
@@ -2516,14 +2885,16 @@
                 title: "5 Easy Weeknight Dinners",
                 duration: "12:45",
                 views: "45K",
-                likes: "3.2K"
+                likes: "3.2K",
+                thumbnail: "https://images.unsplash.com/photo-1556910633-5097e39d0c4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
             },
             {
                 id: 2,
                 title: "Mastering Knife Skills",
                 duration: "15:20",
                 views: "28K",
-                likes: "2.1K"
+                likes: "2.1K",
+                thumbnail: "https://images.unsplash.com/photo-1592417817098-8fd3d9cb14a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80"
             }
         ];
 
@@ -2535,11 +2906,11 @@
             { name: "Garlic", quantity: 1, status: "low" }
         ];
 
-        // Cart items
+        // Cart items - Updated with Bangladeshi Taka prices
         const cartItems = [
-            { name: "Curry Powder", price: 3.99, quantity: 1 },
-            { name: "Coconut Milk", price: 2.49, quantity: 1 },
-            { name: "Fresh Cilantro", price: 1.99, quantity: 1 }
+            { name: "Curry Powder", price: 120, quantity: 1 },
+            { name: "Coconut Milk", price: 80, quantity: 1 },
+            { name: "Fresh Cilantro", price: 30, quantity: 1 }
         ];
 
         let selectedIngredients = [];
@@ -2553,6 +2924,58 @@
         let cookingAssistantPaused = false;
         let cookingStepIndex = 0;
         let speechSynthesis = window.speechSynthesis;
+
+        // Language switching function
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'bn' : 'en';
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+
+            // Update placeholder texts
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[currentLanguage][key]) {
+                    element.setAttribute('placeholder', translations[currentLanguage][key]);
+                }
+            });
+
+            // Update language switcher
+            const languageFlag = document.getElementById('language-flag');
+            const languageText = document.getElementById('language-text');
+            
+            if (currentLanguage === 'en') {
+                languageFlag.className = 'language-flag flag-en';
+                languageFlag.textContent = 'EN';
+            } else {
+                languageFlag.className = 'language-flag flag-bn';
+                languageFlag.textContent = 'বাং';
+            }
+            
+            // Update recipe count text
+            updateRecipeCountText();
+        }
+
+        function updateRecipeCountText() {
+            const recipeCount = document.getElementById('recipe-count');
+            const recipeCountText = document.querySelector('.subtitle span');
+            if (recipeCount && recipeCountText) {
+                const count = recipeCount.textContent;
+                if (currentLanguage === 'en') {
+                    recipeCountText.textContent = `We found ${count} recipes matching your ingredients and preferences`;
+                } else {
+                    recipeCountText.textContent = `আমরা ${count}টি রেসিপি পেয়েছি যা আপনার উপাদান এবং পছন্দগুলির সাথে মেলে`;
+                }
+            }
+        }
 
         // Mobile menu toggle
         function toggleMobileMenu() {
@@ -2573,6 +2996,17 @@
             
             // Hide any conflict alerts
             hideConflictAlert();
+        }
+
+        // Clear dietary preferences
+        function clearDietaryPreferences() {
+            activeDiets = [];
+            document.querySelectorAll('.preference-option').forEach(option => {
+                option.classList.remove('active');
+                option.classList.remove('conflict');
+            });
+            hideConflictAlert();
+            updateIngredientSuggestions();
         }
 
         // Show add item modal
@@ -2622,7 +3056,8 @@
                             <span>${item.quantity}</span>
                             <button class="quantity-btn" onclick="increaseQuantity('${item.name}')">+</button>
                         </div>
-                        <div class="cart-item-price">$${itemTotal.toFixed(2)}</div>
+                        <!-- Updated to use Bangladeshi Taka symbol -->
+                        <div class="cart-item-price">৳ ${itemTotal}</div>
                         <button class="quantity-btn" onclick="removeFromCart('${item.name}')">
                             <i class="fas fa-trash"></i>
                         </button>
@@ -2632,7 +3067,8 @@
                 container.appendChild(cartItem);
             });
             
-            totalElement.textContent = `$${total.toFixed(2)}`;
+            // Updated to use Bangladeshi Taka symbol
+            totalElement.textContent = `৳ ${total}`;
             
             // Update cart count
             const cartCount = document.querySelector('.cart-count');
@@ -2706,19 +3142,18 @@
                 card.onclick = () => showRecipeDetail(recipe);
                 
                 card.innerHTML = `
-                    <div class="recipe-image">
+                    <div class="recipe-image" style="background-image: url('${recipe.image}')">
                         <div class="overlay">
-                            <i class="fas fa-eye"></i> View Recipe
+                            <i class="fas fa-eye"></i> ${currentLanguage === 'en' ? 'View Recipe' : 'রেসিপি দেখুন'}
                         </div>
-                        Recipe Image
                     </div>
                     <div class="recipe-content">
                         <div class="recipe-title">${recipe.title}</div>
                         <div class="recipe-meta">
-                            <span>${recipe.cookTime} mins • ${recipe.difficulty}</span>
+                            <span>${recipe.cookTime} ${currentLanguage === 'en' ? 'mins' : 'মিনিট'} • ${recipe.difficulty}</span>
                             <div class="match-score">
                                 <div class="score-circle">${recipe.matchScore}/10</div>
-                                Match
+                                ${currentLanguage === 'en' ? 'Match' : 'মিল'}
                             </div>
                         </div>
                     </div>
@@ -2738,14 +3173,14 @@
                 card.className = 'video-card';
                 
                 card.innerHTML = `
-                    <div class="video-thumbnail">
+                    <div class="video-thumbnail" style="background-image: url('${video.thumbnail}')">
                         <i class="fas fa-play play-icon"></i>
-                        Video Thumbnail
+                        ${currentLanguage === 'en' ? 'Video Thumbnail' : 'ভিডিও থাম্বনেইল'}
                     </div>
                     <div class="video-content">
                         <div class="video-title">${video.title}</div>
                         <div class="video-meta">
-                            <span>${video.duration} • ${video.views} views</span>
+                            <span>${video.duration} • ${video.views} ${currentLanguage === 'en' ? 'views' : 'দেখেছে'}</span>
                             <span><i class="fas fa-thumbs-up"></i> ${video.likes}</span>
                         </div>
                     </div>
@@ -2808,9 +3243,11 @@
             });
             
             if (rating > 0) {
-                ratingText.textContent = `You rated this recipe ${rating} out of 5 stars`;
+                ratingText.textContent = currentLanguage === 'en' 
+                    ? `You rated this recipe ${rating} out of 5 stars`
+                    : `আপনি এই রেসিপিটিকে ৫ এর মধ্যে ${rating} স্টার দিয়েছেন`;
             } else {
-                ratingText.textContent = 'Rate this recipe';
+                ratingText.textContent = currentLanguage === 'en' ? 'Rate this recipe' : 'এই রেসিপি রেট করুন';
             }
         }
 
@@ -2868,9 +3305,9 @@
             cookingStepIndex = 0;
             
             // Update button state
-            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-pause"></i> Pause Assistant';
+            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-pause"></i> ' + (currentLanguage === 'en' ? 'Pause Assistant' : 'অ্যাসিস্টেন্ট বিরতি দিন');
             document.getElementById('stop-cooking-btn').style.display = 'flex';
-            document.getElementById('voice-status').textContent = 'Assistant started - Step 1';
+            document.getElementById('voice-status').textContent = currentLanguage === 'en' ? 'Assistant started - Step 1' : 'অ্যাসিস্টেন্ট শুরু হয়েছে - ধাপ ১';
             
             // Update cooking journey
             updateCookingJourney();
@@ -2886,8 +3323,8 @@
             speechSynthesis.pause();
             
             // Update button state
-            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-play"></i> Resume Assistant';
-            document.getElementById('voice-status').textContent = 'Assistant paused';
+            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-play"></i> ' + (currentLanguage === 'en' ? 'Resume Assistant' : 'অ্যাসিস্টেন্ট পুনরায় শুরু করুন');
+            document.getElementById('voice-status').textContent = currentLanguage === 'en' ? 'Assistant paused' : 'অ্যাসিস্টেন্ট বিরতিতে';
         }
 
         function resumeCookingAssistant() {
@@ -2897,8 +3334,8 @@
             speechSynthesis.resume();
             
             // Update button state
-            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-pause"></i> Pause Assistant';
-            document.getElementById('voice-status').textContent = 'Assistant resumed';
+            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-pause"></i> ' + (currentLanguage === 'en' ? 'Pause Assistant' : 'অ্যাসিস্টেন্ট বিরতি দিন');
+            document.getElementById('voice-status').textContent = currentLanguage === 'en' ? 'Assistant resumed' : 'অ্যাসিস্টেন্ট পুনরায় শুরু হয়েছে';
         }
 
         function stopCookingAssistant() {
@@ -2907,9 +3344,9 @@
             speechSynthesis.cancel();
             
             // Update button state
-            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-play"></i> Start Assistant';
+            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-play"></i> ' + (currentLanguage === 'en' ? 'Start Assistant' : 'অ্যাসিস্টেন্ট শুরু করুন');
             document.getElementById('stop-cooking-btn').style.display = 'none';
-            document.getElementById('voice-status').textContent = 'Assistant stopped';
+            document.getElementById('voice-status').textContent = currentLanguage === 'en' ? 'Assistant stopped' : 'অ্যাসিস্টেন্ট বন্ধ হয়েছে';
             
             // Reset cooking journey
             resetCookingJourney();
@@ -2929,12 +3366,14 @@
                     
                     if (cookingStepIndex < recipe.steps.length) {
                         speakStep(recipe.steps[cookingStepIndex]);
-                        document.getElementById('voice-status').textContent = `Step ${cookingStepIndex + 1} of ${recipe.steps.length}`;
+                        document.getElementById('voice-status').textContent = currentLanguage === 'en' 
+                            ? `Step ${cookingStepIndex + 1} of ${recipe.steps.length}`
+                            : `ধাপ ${cookingStepIndex + 1} / ${recipe.steps.length}`;
                         
                         // Update cooking journey
                         updateCookingJourney();
                     } else {
-                        document.getElementById('voice-status').textContent = 'Cooking complete!';
+                        document.getElementById('voice-status').textContent = currentLanguage === 'en' ? 'Cooking complete!' : 'রান্না সম্পূর্ণ!';
                         stopCookingAssistant();
                     }
                 }, 5000); // 5 second delay between steps
@@ -2963,7 +3402,7 @@
                 stepElement.innerHTML = `
                     <div class="step-number">${index + 1}</div>
                     <div class="step-content">
-                        <div class="step-title">Step ${index + 1}</div>
+                        <div class="step-title">${currentLanguage === 'en' ? 'Step' : 'ধাপ'} ${index + 1}</div>
                         <div class="step-desc">${step}</div>
                     </div>
                 `;
@@ -2982,7 +3421,7 @@
         function generateAIRecipe() {
             const prompt = document.getElementById('ai-prompt').value;
             if (!prompt) {
-                alert('Please describe what you want to cook!');
+                alert(currentLanguage === 'en' ? 'Please describe what you want to cook!' : 'দয়া করে বর্ণনা করুন আপনি কী রান্না করতে চান!');
                 return;
             }
             
@@ -3011,24 +3450,24 @@
                 <h4>${aiRecipe.title}</h4>
                 <p>${aiRecipe.description}</p>
                 
-                <h5>Ingredients:</h5>
+                <h5>${currentLanguage === 'en' ? 'Ingredients:' : 'উপাদান:'}</h5>
                 <ul>
                     ${aiRecipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
                 </ul>
                 
-                <h5>Instructions:</h5>
+                <h5>${currentLanguage === 'en' ? 'Instructions:' : 'নির্দেশাবলী:'}</h5>
                 <ol>
                     ${aiRecipe.steps.map(step => `<li>${step}</li>`).join('')}
                 </ol>
                 
-                <p><strong>Cooking Time:</strong> ${aiRecipe.cookTime} minutes | <strong>Servings:</strong> ${aiRecipe.servings}</p>
+                <p><strong>${currentLanguage === 'en' ? 'Cooking Time:' : 'রান্নার সময়:'}</strong> ${aiRecipe.cookTime} ${currentLanguage === 'en' ? 'minutes' : 'মিনিট'} | <strong>${currentLanguage === 'en' ? 'Servings:' : 'পরিবেশন:'}</strong> ${aiRecipe.servings}</p>
             `;
             
             document.getElementById('ai-result').classList.add('active');
         }
 
         function saveAIRecipe() {
-            alert('AI recipe saved to your collection!');
+            alert(currentLanguage === 'en' ? 'AI recipe saved to your collection!' : 'এআই রেসিপি আপনার সংগ্রহে সংরক্ষণ করা হয়েছে!');
         }
 
         function addAIIngredientsToCart() {
@@ -3041,12 +3480,12 @@
                 notification.classList.remove('show');
             }, 3000);
             
-            alert('AI recipe ingredients added to your cart!');
+            alert(currentLanguage === 'en' ? 'AI recipe ingredients added to your cart!' : 'এআই রেসিপির উপাদানগুলি আপনার কার্টে যোগ করা হয়েছে!');
         }
 
         // Smart Pantry functions
         function scanReceipt() {
-            alert('Simulating receipt scanning... Items added to pantry!');
+            alert(currentLanguage === 'en' ? 'Simulating receipt scanning... Items added to pantry!' : 'রসিদ স্ক্যান করার অনুকরণ করা হচ্ছে... আইটেমগুলি প্যান্ট্রিতে যোগ করা হয়েছে!');
             // In a real app, this would use OCR to scan receipts and add items to pantry
         }
 
@@ -3056,7 +3495,7 @@
             const status = document.getElementById('item-status').value;
             
             if (!name) {
-                alert('Please enter an item name');
+                alert(currentLanguage === 'en' ? 'Please enter an item name' : 'দয়া করে একটি আইটেমের নাম লিখুন');
                 return;
             }
             
@@ -3119,7 +3558,7 @@
         function toggleDiet(diet) {
             // Check if diet is in conflict and cannot be deselected
             if (currentConflict && currentConflict.diet === diet) {
-                alert(`Cannot deselect ${dietaryRestrictions[diet].name} diet while it's in conflict with "${currentConflict.ingredient}". Please resolve the conflict first.`);
+                alert(`${dietaryRestrictions[diet].name} ${currentLanguage === 'en' ? 'diet cannot be deselected while it\'s in conflict with' : 'ডায়েট বাতিল করা যাবে না যখন এটি দ্বন্দ্বে রয়েছে'} "${currentConflict.ingredient}". ${currentLanguage === 'en' ? 'Please resolve the conflict first.' : 'দয়া করে প্রথমে দ্বন্দ্বটি সমাধান করুন।'}`);
                 return;
             }
             
@@ -3184,11 +3623,11 @@
             const conflictCard = document.createElement('div');
             conflictCard.className = 'conflict-resolution';
             conflictCard.innerHTML = `
-                <h3>Dietary Conflict Detected</h3>
-                <p>"${ingredient}" conflicts with your ${dietData.name} diet. ${dietData.message}</p>
+                <h3>${currentLanguage === 'en' ? 'Dietary Conflict Detected' : 'ডায়েটারি দ্বন্দ্ব সনাক্ত হয়েছে'}</h3>
+                <p>"${ingredient}" ${currentLanguage === 'en' ? 'conflicts with your' : 'আপনার'} ${dietData.name} ${currentLanguage === 'en' ? 'diet.' : 'ডায়েটের সাথে দ্বন্দ্বে রয়েছে।'} ${dietData.message}</p>
                 <div class="resolution-options">
-                    <button class="resolution-btn resolution-primary" onclick="resolveConflict('keepDiet')">Keep Diet, Remove Ingredient</button>
-                    <button class="resolution-btn resolution-secondary" onclick="resolveConflict('keepIngredient')">Keep Ingredient, Remove Diet</button>
+                    <button class="resolution-btn resolution-primary" onclick="resolveConflict('keepDiet')">${currentLanguage === 'en' ? 'Keep Diet, Remove Ingredient' : 'ডায়েট রাখুন, উপাদান সরান'}</button>
+                    <button class="resolution-btn resolution-secondary" onclick="resolveConflict('keepIngredient')">${currentLanguage === 'en' ? 'Keep Ingredient, Remove Diet' : 'উপাদান রাখুন, ডায়েট সরান'}</button>
                 </div>
             `;
             
@@ -3346,7 +3785,9 @@
         
         function findRecipes() {
             if (selectedIngredients.length === 0) {
-                alert("Please select at least one ingredient to find recipes.");
+                alert(currentLanguage === 'en' 
+                    ? "Please select at least one ingredient to find recipes." 
+                    : "রেসিপি খুঁজে পেতে অন্তত একটি উপাদান নির্বাচন করুন।");
                 return;
             }
             
@@ -3430,19 +3871,18 @@
                 card.onclick = () => showRecipeDetail(recipe);
                 
                 card.innerHTML = `
-                    <div class="recipe-image">
+                    <div class="recipe-image" style="background-image: url('${recipe.image}')">
                         <div class="overlay">
-                            <i class="fas fa-eye"></i> View Recipe
+                            <i class="fas fa-eye"></i> ${currentLanguage === 'en' ? 'View Recipe' : 'রেসিপি দেখুন'}
                         </div>
-                        Recipe Image
                     </div>
                     <div class="recipe-content">
                         <div class="recipe-title">${recipe.title}</div>
                         <div class="recipe-meta">
-                            <span>${recipe.cookTime} mins • ${recipe.difficulty}</span>
+                            <span>${recipe.cookTime} ${currentLanguage === 'en' ? 'mins' : 'মিনিট'} • ${recipe.difficulty}</span>
                             <div class="match-score">
                                 <div class="score-circle">${recipe.matchScore}/10</div>
-                                Match
+                                ${currentLanguage === 'en' ? 'Match' : 'মিল'}
                             </div>
                         </div>
                     </div>
@@ -3461,8 +3901,11 @@
             // Update recipe details
             document.getElementById('detail-recipe-title').textContent = recipe.title;
             document.getElementById('detail-recipe-meta').textContent = 
-                `${recipe.cookTime} mins • ${recipe.difficulty} • Serves ${recipe.servings}`;
+                `${recipe.cookTime} ${currentLanguage === 'en' ? 'mins' : 'মিনিট'} • ${recipe.difficulty} • ${currentLanguage === 'en' ? 'Serves' : 'পরিবেশন'} ${recipe.servings}`;
             document.getElementById('detail-recipe-desc').textContent = recipe.description;
+            
+            // Update recipe image
+            document.getElementById('detail-recipe-image').style.backgroundImage = `url('${recipe.image}')`;
             
             // Update ingredients
             const ingredientsContainer = document.getElementById('detail-ingredients');
@@ -3490,19 +3933,19 @@
                 nutritionContainer.innerHTML = `
                     <div class="nutrition-item">
                         <div class="nutrition-value">${recipe.nutrition.calories}</div>
-                        <div class="nutrition-label">Calories</div>
+                        <div class="nutrition-label">${currentLanguage === 'en' ? 'Calories' : 'ক্যালোরি'}</div>
                     </div>
                     <div class="nutrition-item">
                         <div class="nutrition-value">${recipe.nutrition.protein}g</div>
-                        <div class="nutrition-label">Protein</div>
+                        <div class="nutrition-label">${currentLanguage === 'en' ? 'Protein' : 'প্রোটিন'}</div>
                     </div>
                     <div class="nutrition-item">
                         <div class="nutrition-value">${recipe.nutrition.carbs}g</div>
-                        <div class="nutrition-label">Carbs</div>
+                        <div class="nutrition-label">${currentLanguage === 'en' ? 'Carbs' : 'কার্বোহাইড্রেট'}</div>
                     </div>
                     <div class="nutrition-item">
                         <div class="nutrition-value">${recipe.nutrition.fat}g</div>
-                        <div class="nutrition-label">Fat</div>
+                        <div class="nutrition-label">${currentLanguage === 'en' ? 'Fat' : 'ফ্যাট'}</div>
                     </div>
                 `;
             }
@@ -3510,6 +3953,7 @@
             // Update video info
             if (recipe.video) {
                 document.getElementById('video-title').textContent = recipe.video.title;
+                document.getElementById('video-thumbnail').style.backgroundImage = `url('${recipe.image}')`;
             }
             
             // Update progress steps
@@ -3518,7 +3962,7 @@
             recipe.steps.forEach((step, index) => {
                 const stepElement = document.createElement('div');
                 stepElement.className = 'progress-step';
-                stepElement.textContent = `Step ${index + 1}`;
+                stepElement.textContent = `${currentLanguage === 'en' ? 'Step' : 'ধাপ'} ${index + 1}`;
                 progressStepsContainer.appendChild(stepElement);
             });
             
@@ -3540,19 +3984,18 @@
                 card.onclick = () => showRecipeDetail(relatedRecipe);
                 
                 card.innerHTML = `
-                    <div class="recipe-image">
+                    <div class="recipe-image" style="background-image: url('${relatedRecipe.image}')">
                         <div class="overlay">
-                            <i class="fas fa-eye"></i> View Recipe
+                            <i class="fas fa-eye"></i> ${currentLanguage === 'en' ? 'View Recipe' : 'রেসিপি দেখুন'}
                         </div>
-                        Recipe Image
                     </div>
                     <div class="recipe-content">
                         <div class="recipe-title">${relatedRecipe.title}</div>
                         <div class="recipe-meta">
-                            <span>${relatedRecipe.cookTime} mins • ${relatedRecipe.difficulty}</span>
+                            <span>${relatedRecipe.cookTime} ${currentLanguage === 'en' ? 'mins' : 'মিনিট'} • ${relatedRecipe.difficulty}</span>
                             <div class="match-score">
                                 <div class="score-circle">${relatedRecipe.matchScore}/10</div>
-                                Match
+                                ${currentLanguage === 'en' ? 'Match' : 'মিল'}
                             </div>
                         </div>
                     </div>
@@ -3570,12 +4013,12 @@
             isRecipeSaved = !isRecipeSaved;
             
             if (isRecipeSaved) {
-                saveBtn.innerHTML = '<i class="fas fa-heart"></i> Saved';
+                saveBtn.innerHTML = '<i class="fas fa-heart"></i> ' + (currentLanguage === 'en' ? 'Saved' : 'সংরক্ষিত');
                 saveBtn.style.color = '#ff5722';
                 saveBtn.style.borderColor = '#ff5722';
             } else {
-                saveBtn.innerHTML = '<i class="far fa-heart"></i> Save Recipe';
-                saveBtn.style.color = '#000';
+                saveBtn.innerHTML = '<i class="far fa-heart"></i> ' + (currentLanguage === 'en' ? 'Save Recipe' : 'রেসিপি সংরক্ষণ করুন');
+                saveBtn.style.color = '#f0f0f0';
                 saveBtn.style.borderColor = '#ffeb3b';
             }
         }
@@ -3622,6 +4065,7 @@
             updatePantryDisplay();
             updateCartDisplay();
             initStarRating();
+            updateLanguage();
             
             // Set default filter
             currentFilter = "all";
