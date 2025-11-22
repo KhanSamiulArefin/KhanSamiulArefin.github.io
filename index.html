@@ -1537,6 +1537,9 @@
 
         .step-content {
             flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .step-title {
@@ -1638,6 +1641,48 @@
             background-color: #333;
             color: #f0f0f0;
             border: 1px solid #ffeb3b;
+        }
+
+        /* NEW: Step Checkbox */
+        .step-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #ffeb3b;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .step-checkbox.checked {
+            background: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .step-checkbox.checked:after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+        }
+
+        /* NEW: Saved Recipe Color */
+        .saved-recipe {
+            background-color: #1a3a1a !important;
+            border-color: #4caf50 !important;
+        }
+
+        .saved-recipe .btn-secondary {
+            background-color: #4caf50 !important;
+            border-color: #4caf50 !important;
+            color: white !important;
+        }
+
+        /* NEW: Hide clear buttons when nothing is selected */
+        .clear-btn-container.hidden {
+            display: none !important;
         }
 
         /* Tablet and Desktop Styles */
@@ -1844,7 +1889,7 @@
             <div class="dashboard-categories">
                 <div class="category-card" onclick="toggleCategory(this)">
                     <div class="category-icon">
-                        <i class="fas fa-utensils"></i>
+                        <i class="fas fa-bolt"></i>
                     </div>
                     <div class="category-title" data-translate="quick_easy">Quick & Easy</div>
                     <div class="subcategories">
@@ -1856,7 +1901,7 @@
                 
                 <div class="category-card" onclick="toggleCategory(this)">
                     <div class="category-icon">
-                        <i class="fas fa-leaf"></i>
+                        <i class="fas fa-heartbeat"></i>
                     </div>
                     <div class="category-title" data-translate="healthy_choices">Healthy Choices</div>
                     <div class="subcategories">
@@ -1868,7 +1913,7 @@
                 
                 <div class="category-card" onclick="toggleCategory(this)">
                     <div class="category-icon">
-                        <i class="fas fa-globe"></i>
+                        <i class="fas fa-globe-americas"></i>
                     </div>
                     <div class="category-title" data-translate="cuisine_types">Cuisine Types</div>
                     <div class="subcategories">
@@ -1880,7 +1925,7 @@
                 
                 <div class="category-card" onclick="toggleCategory(this)">
                     <div class="category-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-leaf"></i>
                     </div>
                     <div class="category-title" data-translate="dietary_needs">Dietary Needs</div>
                     <div class="subcategories">
@@ -1947,10 +1992,12 @@
                     <div class="preference-option" data-diet="nutFree" onclick="toggleDiet('nutFree')" data-translate="nut_free">Nut-Free</div>
                     <div class="preference-option" data-diet="lowCarb" onclick="toggleDiet('lowCarb')" data-translate="low_carb">Low-Carb</div>
                 </div>
-                <!-- Modern Clear button for dietary preferences -->
-                <button class="clear-filter-btn" onclick="clearDietaryPreferences()" style="margin-top: 10px;">
-                    <i class="fas fa-times"></i> <span data-translate="clear_preferences">Clear Preferences</span>
-                </button>
+                <!-- Modern Clear button for dietary preferences - Now hidden by default -->
+                <div class="clear-btn-container" id="dietary-clear-container" style="margin-top: 10px;">
+                    <button class="clear-filter-btn" onclick="clearDietaryPreferences()">
+                        <i class="fas fa-times"></i> <span data-translate="clear_preferences">Clear Preferences</span>
+                    </button>
+                </div>
             </div>
             
             <div class="ingredient-section">
@@ -1961,10 +2008,12 @@
                     <div id="selected-ingredients" class="ingredient-pills">
                         <!-- Selected ingredients will appear here -->
                     </div>
-                    <!-- Modern Clear button for selected ingredients -->
-                    <button class="clear-filter-btn" onclick="clearSelectedIngredients()">
-                        <i class="fas fa-times"></i> <span data-translate="clear_all">Clear All</span>
-                    </button>
+                    <!-- Modern Clear button for selected ingredients - Now hidden by default -->
+                    <div class="clear-btn-container" id="ingredients-clear-container">
+                        <button class="clear-filter-btn" onclick="clearSelectedIngredients()">
+                            <i class="fas fa-times"></i> <span data-translate="clear_all">Clear All</span>
+                        </button>
+                    </div>
                 </div>
                 
                 <input type="text" class="search-bar" id="ingredient-search" data-translate-placeholder="search_ingredients" placeholder="Search for ingredients (e.g., chicken, tomatoes, rice)..." onkeyup="searchIngredients()">
@@ -2029,7 +2078,7 @@
                 </button>
             </div>
             
-            <div class="recipe-detail">
+            <div class="recipe-detail" id="recipe-detail-container">
                 <div>
                     <div class="recipe-detail-image" id="detail-recipe-image">
                         <div class="overlay">
@@ -2640,11 +2689,100 @@
             }
         };
 
+        // AI Recipe Generator Templates in Bengali
+        const aiRecipesBn = {
+            vegetarian: {
+                title: "এআই তৈরিকৃত নিরামিষ রেসিপি",
+                description: "এই রেসিপিটি আমাদের এআই শেফ দ্বারা আপনার পছন্দের ভিত্তিতে তৈরি করা হয়েছে।",
+                ingredients: [
+                    "টমেটো (৪টি মাঝারি)",
+                    "পেঁয়াজ (২টি মাঝারি)",
+                    "রসুন (৪ কোয়া)",
+                    "চাল (২ কাপ)",
+                    "তেল (২ টেবিল চামচ)",
+                    "লবণ (স্বাদমতো)",
+                    "মরিচ গুঁড়া (১ চা চামচ)",
+                    "হলুদ গুঁড়া (১/২ চা চামচ)",
+                    "তাজা ধনিয়া পাতা (সাজানোর জন্য)"
+                ],
+                steps: [
+                    "প্রথমে টমেটো, পেঁয়াজ ও রসুন কুচি করে নিন।",
+                    "একটি প্যানে তেল গরম করুন।",
+                    "পেঁয়াজ ও রসুন দিন এবং সোনালি বর্ণ না হওয়া পর্যন্ত ভাজুন।",
+                    "টমেটো যোগ করুন এবং নরম হওয়া পর্যন্ত রান্না করুন।",
+                    "মসলা (লবণ, মরিচ গুঁড়া, হলুদ গুঁড়া) যোগ করুন।",
+                    "২ কাপ পানি যোগ করুন এবং ফুটতে দিন।",
+                    "ধোয়া চাল যোগ করুন এবং ঢেকে দিন।",
+                    "কম আঁচে ১৫-২০ মিনিট রান্না করুন।",
+                    "উপরে তাজা ধনিয়া পাতা দিয়ে সাজিয়ে পরিবেশন করুন।"
+                ],
+                cookTime: 30,
+                servings: 3
+            },
+            chicken: {
+                title: "এআই তৈরিকৃত চিকেন রেসিপি",
+                description: "এই সুস্বাদু চিকেন রেসিপিটি আমাদের এআই শেফ দ্বারা আপনার পছন্দের ভিত্তিতে তৈরি করা হয়েছে।",
+                ingredients: [
+                    "মুরগির মাংস (৫০০ গ্রাম)",
+                    "পেঁয়াজ (২টি মাঝারি)",
+                    "টমেটো (৩টি মাঝারি)",
+                    "রসুন (৫ কোয়া)",
+                    "আদা (১ ইঞ্চি)",
+                    "তেল (৩ টেবিল চামচ)",
+                    "দই (১/২ কাপ)",
+                    "গরম মসলা (১ চা চামচ)",
+                    "লবণ (স্বাদমতো)",
+                    "তাজা ধনিয়া পাতা (সাজানোর জন্য)"
+                ],
+                steps: [
+                    "মুরগির মাংস ধুয়ে টুকরো করে নিন।",
+                    "একটি বাটিতে দই, আদা-রসুন বাটা এবং মসলা দিয়ে মুরগি ম্যারিনেট করুন।",
+                    "একটি প্যানে তেল গরম করুন।",
+                    "পেঁয়াজ কুচি করে সোনালি বর্ণ না হওয়া পর্যন্ত ভাজুন।",
+                    "ম্যারিনেট করা মুরগি যোগ করুন এবং সব দিক সিদ্ধ হয়ে যাওয়া পর্যন্ত ভাজুন।",
+                    "টমেটো যোগ করুন এবং নরম হওয়া পর্যন্ত রান্না করুন।",
+                    "অল্প পানি যোগ করুন এবং ঢেকে ১৫-২০ মিনিট রান্না করুন।",
+                    "লবণ যোগ করে স্বাদ মিলিয়ে নিন।",
+                    "উপরে তাজা ধনিয়া পাতা দিয়ে সাজিয়ে গরম গরম পরিবেশন করুন।"
+                ],
+                cookTime: 40,
+                servings: 4
+            },
+            quick: {
+                title: "এআই তৈরিকৃত দ্রুত রেসিপি",
+                description: "এই দ্রুত ও সহজ রেসিপিটি আমাদের এআই শেফ দ্বারা তৈরি করা হয়েছে।",
+                ingredients: [
+                    "ডিম (৪টি)",
+                    "পেঁয়াজ (১টি মাঝারি)",
+                    "কাঁচা মরিচ (২টি)",
+                    "টমেটো (১টি মাঝারি)",
+                    "তেল (২ টেবিল চামচ)",
+                    "লবণ (স্বাদমতো)",
+                    "গোলমরিচ গুঁড়া (১/২ চা চামচ)",
+                    "তাজা ধনিয়া পাতা (কুচি করা)"
+                ],
+                steps: [
+                    "পেঁয়াজ, টমেটো ও কাঁচা মরিচ কুচি করে নিন।",
+                    "একটি বাটিতে ডিম ভেঙে ফেটিয়ে নিন।",
+                    "একটি প্যানে তেল গরম করুন।",
+                    "পেঁয়াজ ও কাঁচা মরিচ ভাজুন।",
+                    "টমেটো যোগ করুন এবং নরম হওয়া পর্যন্ত রান্না করুন।",
+                    "ডিমের মিশ্রণটি প্যানে ঢালুন।",
+                    "লবণ ও গোলমরিচ গুঁড়া যোগ করুন।",
+                    "নরম হয়ে আসা পর্যন্ত নাড়তে থাকুন।",
+                    "উপরে কুচি করা ধনিয়া পাতা ছড়িয়ে দিয়ে পরিবেশন করুন।"
+                ],
+                cookTime: 15,
+                servings: 2
+            }
+        };
+
         // User preferences object
         const userPreferences = {
             viewedRecipes: [],
             ratings: {},
-            pantry: []
+            pantry: [],
+            savedRecipes: []
         };
 
         // Dietary restrictions data
@@ -2924,6 +3062,7 @@
         let cookingAssistantPaused = false;
         let cookingStepIndex = 0;
         let speechSynthesis = window.speechSynthesis;
+        let cookingTimer = null;
 
         // Language switching function
         function toggleLanguage() {
@@ -2996,6 +3135,9 @@
             
             // Hide any conflict alerts
             hideConflictAlert();
+            
+            // Hide clear button
+            updateClearButtonVisibility();
         }
 
         // Clear dietary preferences
@@ -3007,6 +3149,9 @@
             });
             hideConflictAlert();
             updateIngredientSuggestions();
+            
+            // Hide clear button
+            updateClearButtonVisibility();
         }
 
         // Show add item modal
@@ -3285,7 +3430,7 @@
             });
         }
 
-        // Voice cooking assistant
+        // Voice cooking assistant - FIXED TO PREVENT CONTINUOUS SPEECH
         function toggleCookingAssistant() {
             if (!cookingAssistantActive) {
                 startCookingAssistant();
@@ -3341,7 +3486,16 @@
         function stopCookingAssistant() {
             cookingAssistantActive = false;
             cookingAssistantPaused = false;
-            speechSynthesis.cancel();
+            
+            // IMPORTANT FIX: Cancel any ongoing speech synthesis
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            
+            if (cookingTimer) {
+                clearTimeout(cookingTimer);
+                cookingTimer = null;
+            }
             
             // Update button state
             document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-play"></i> ' + (currentLanguage === 'en' ? 'Start Assistant' : 'অ্যাসিস্টেন্ট শুরু করুন');
@@ -3357,8 +3511,8 @@
             
             const utterance = new SpeechSynthesisUtterance(step);
             utterance.onend = function() {
-                // Wait 5 seconds before speaking the next step
-                setTimeout(() => {
+                // Set a timer to automatically move to the next step after 5 seconds
+                cookingTimer = setTimeout(() => {
                     if (!cookingAssistantActive || cookingAssistantPaused) return;
                     
                     cookingStepIndex++;
@@ -3382,7 +3536,7 @@
             speechSynthesis.speak(utterance);
         }
 
-        // Update cooking journey display
+        // Update cooking journey display with checkboxes
         function updateCookingJourney() {
             const recipe = recipes.find(r => r.id === currentRecipeId);
             const container = document.getElementById('cooking-journey');
@@ -3402,13 +3556,42 @@
                 stepElement.innerHTML = `
                     <div class="step-number">${index + 1}</div>
                     <div class="step-content">
-                        <div class="step-title">${currentLanguage === 'en' ? 'Step' : 'ধাপ'} ${index + 1}</div>
-                        <div class="step-desc">${step}</div>
+                        <div>
+                            <div class="step-title">${currentLanguage === 'en' ? 'Step' : 'ধাপ'} ${index + 1}</div>
+                            <div class="step-desc">${step}</div>
+                        </div>
+                        <div class="step-checkbox ${index < cookingStepIndex ? 'checked' : ''}" 
+                             onclick="completeStep(${index})"></div>
                     </div>
                 `;
                 
                 container.appendChild(stepElement);
             });
+        }
+
+        // Complete a cooking step (when checkbox is clicked)
+        function completeStep(stepIndex) {
+            if (stepIndex !== cookingStepIndex) return;
+            
+            const recipe = recipes.find(r => r.id === currentRecipeId);
+            cookingStepIndex++;
+            
+            if (cookingStepIndex < recipe.steps.length) {
+                document.getElementById('voice-status').textContent = currentLanguage === 'en' 
+                    ? `Step ${cookingStepIndex + 1} of ${recipe.steps.length}`
+                    : `ধাপ ${cookingStepIndex + 1} / ${recipe.steps.length}`;
+                
+                // Update cooking journey
+                updateCookingJourney();
+                
+                // Speak the next step
+                if (cookingAssistantActive && !cookingAssistantPaused) {
+                    speakStep(recipe.steps[cookingStepIndex]);
+                }
+            } else {
+                document.getElementById('voice-status').textContent = currentLanguage === 'en' ? 'Cooking complete!' : 'রান্না সম্পূর্ণ!';
+                stopCookingAssistant();
+            }
         }
 
         // Reset cooking journey
@@ -3417,7 +3600,7 @@
             container.innerHTML = '';
         }
 
-        // AI Recipe Generator
+        // AI Recipe Generator - UPDATED TO SUPPORT BENGALI
         function generateAIRecipe() {
             const prompt = document.getElementById('ai-prompt').value;
             if (!prompt) {
@@ -3425,43 +3608,77 @@
                 return;
             }
             
-            // Simulate AI recipe generation
-            const aiRecipe = {
-                title: "AI-Generated " + (prompt.includes('vegetarian') ? 'Vegetarian' : '') + " Recipe",
-                description: "This recipe was custom-created by our AI chef based on your preferences: " + prompt,
-                ingredients: [
-                    "2 cups of main ingredient",
-                    "1 tbsp of oil",
-                    "Seasonings to taste",
-                    "Fresh herbs for garnish"
-                ],
-                steps: [
-                    "Prepare your ingredients as described.",
-                    "Follow the cooking method that best suits your available tools.",
-                    "Adjust seasoning to your preference.",
-                    "Garnish and serve hot."
-                ],
-                cookTime: 30,
-                servings: 2
-            };
+            // Determine recipe type based on prompt
+            let recipeType = 'vegetarian';
+            if (prompt.toLowerCase().includes('chicken') || prompt.toLowerCase().includes('meat')) {
+                recipeType = 'chicken';
+            } else if (prompt.toLowerCase().includes('quick') || prompt.toLowerCase().includes('fast')) {
+                recipeType = 'quick';
+            }
+            
+            // Get AI recipe based on language
+            let aiRecipe;
+            if (currentLanguage === 'bn') {
+                aiRecipe = aiRecipesBn[recipeType];
+            } else {
+                // English AI recipe
+                aiRecipe = {
+                    title: "AI-Generated " + (recipeType === 'vegetarian' ? 'Vegetarian' : recipeType === 'chicken' ? 'Chicken' : 'Quick') + " Recipe",
+                    description: "This recipe was custom-created by our AI chef based on your preferences: " + prompt,
+                    ingredients: [
+                        "2 cups of main ingredient",
+                        "1 tbsp of oil",
+                        "Seasonings to taste",
+                        "Fresh herbs for garnish"
+                    ],
+                    steps: [
+                        "Prepare your ingredients as described.",
+                        "Follow the cooking method that best suits your available tools.",
+                        "Adjust seasoning to your preference.",
+                        "Garnish and serve hot."
+                    ],
+                    cookTime: recipeType === 'quick' ? 15 : 30,
+                    servings: recipeType === 'quick' ? 2 : 4
+                };
+            }
             
             const resultContainer = document.getElementById('ai-recipe-content');
-            resultContainer.innerHTML = `
-                <h4>${aiRecipe.title}</h4>
-                <p>${aiRecipe.description}</p>
-                
-                <h5>${currentLanguage === 'en' ? 'Ingredients:' : 'উপাদান:'}</h5>
-                <ul>
-                    ${aiRecipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                </ul>
-                
-                <h5>${currentLanguage === 'en' ? 'Instructions:' : 'নির্দেশাবলী:'}</h5>
-                <ol>
-                    ${aiRecipe.steps.map(step => `<li>${step}</li>`).join('')}
-                </ol>
-                
-                <p><strong>${currentLanguage === 'en' ? 'Cooking Time:' : 'রান্নার সময়:'}</strong> ${aiRecipe.cookTime} ${currentLanguage === 'en' ? 'minutes' : 'মিনিট'} | <strong>${currentLanguage === 'en' ? 'Servings:' : 'পরিবেশন:'}</strong> ${aiRecipe.servings}</p>
-            `;
+            
+            if (currentLanguage === 'bn') {
+                resultContainer.innerHTML = `
+                    <h4>${aiRecipe.title}</h4>
+                    <p>${aiRecipe.description}</p>
+                    
+                    <h5>উপাদান:</h5>
+                    <ul>
+                        ${aiRecipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                    </ul>
+                    
+                    <h5>প্রস্তুত প্রণালী:</h5>
+                    <ol>
+                        ${aiRecipe.steps.map(step => `<li>${step}</li>`).join('')}
+                    </ol>
+                    
+                    <p><strong>রান্নার সময়:</strong> ${aiRecipe.cookTime} মিনিট | <strong>পরিবেশন:</strong> ${aiRecipe.servings}</p>
+                `;
+            } else {
+                resultContainer.innerHTML = `
+                    <h4>${aiRecipe.title}</h4>
+                    <p>${aiRecipe.description}</p>
+                    
+                    <h5>Ingredients:</h5>
+                    <ul>
+                        ${aiRecipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                    </ul>
+                    
+                    <h5>Instructions:</h5>
+                    <ol>
+                        ${aiRecipe.steps.map(step => `<li>${step}</li>`).join('')}
+                    </ol>
+                    
+                    <p><strong>Cooking Time:</strong> ${aiRecipe.cookTime} minutes | <strong>Servings:</strong> ${aiRecipe.servings}</p>
+                `;
+            }
             
             document.getElementById('ai-result').classList.add('active');
         }
@@ -3523,14 +3740,25 @@
             showScreen('screen-7');
         }
 
+        // FIXED: Stop cooking assistant when navigating away from recipe detail screen
         function showScreen(screenId) {
             // Hide all screens
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
             });
             
+            // IMPORTANT FIX: Stop cooking assistant if leaving the recipe detail screen
+            if (cookingAssistantActive && screenId !== 'screen-4') {
+                stopCookingAssistant();
+            }
+            
             // Show the requested screen
             document.getElementById(screenId).classList.add('active');
+            
+            // Reset preferences when returning to home screen
+            if (screenId === 'screen-1') {
+                resetAllPreferences();
+            }
             
             // Update active nav item
             document.querySelectorAll('.nav-item').forEach(item => {
@@ -3544,6 +3772,7 @@
             } else if (screenId === 'screen-2') {
                 document.querySelectorAll('.nav-item')[1].classList.add('active');
                 updateIngredientSuggestions();
+                updateClearButtonVisibility();
             } else if (screenId === 'screen-5') {
                 document.querySelectorAll('.nav-item')[2].classList.add('active');
             } else if (screenId === 'screen-6') {
@@ -3585,6 +3814,9 @@
             if (currentConflict && !checkSpecificConflict(currentConflict.diet, currentConflict.ingredient)) {
                 hideConflictAlert();
             }
+            
+            // Update clear button visibility
+            updateClearButtonVisibility();
         }
         
         function checkDietConflicts() {
@@ -3622,14 +3854,26 @@
             // Create conflict resolution card
             const conflictCard = document.createElement('div');
             conflictCard.className = 'conflict-resolution';
-            conflictCard.innerHTML = `
-                <h3>${currentLanguage === 'en' ? 'Dietary Conflict Detected' : 'ডায়েটারি দ্বন্দ্ব সনাক্ত হয়েছে'}</h3>
-                <p>"${ingredient}" ${currentLanguage === 'en' ? 'conflicts with your' : 'আপনার'} ${dietData.name} ${currentLanguage === 'en' ? 'diet.' : 'ডায়েটের সাথে দ্বন্দ্বে রয়েছে।'} ${dietData.message}</p>
-                <div class="resolution-options">
-                    <button class="resolution-btn resolution-primary" onclick="resolveConflict('keepDiet')">${currentLanguage === 'en' ? 'Keep Diet, Remove Ingredient' : 'ডায়েট রাখুন, উপাদান সরান'}</button>
-                    <button class="resolution-btn resolution-secondary" onclick="resolveConflict('keepIngredient')">${currentLanguage === 'en' ? 'Keep Ingredient, Remove Diet' : 'উপাদান রাখুন, ডায়েট সরান'}</button>
-                </div>
-            `;
+            
+            if (currentLanguage === 'en') {
+                conflictCard.innerHTML = `
+                    <h3>Dietary Conflict Detected</h3>
+                    <p>"${ingredient}" conflicts with your ${dietData.name} diet. ${dietData.message}</p>
+                    <div class="resolution-options">
+                        <button class="resolution-btn resolution-primary" onclick="resolveConflict('keepDiet')">Keep Diet, Remove Ingredient</button>
+                        <button class="resolution-btn resolution-secondary" onclick="resolveConflict('keepIngredient')">Keep Ingredient, Remove Diet</button>
+                    </div>
+                `;
+            } else {
+                conflictCard.innerHTML = `
+                    <h3>ডায়েটারি দ্বন্দ্ব সনাক্ত হয়েছে</h3>
+                    <p>"${ingredient}" আপনার ${dietData.name} ডায়েটের সাথে দ্বন্দ্বে রয়েছে। ${dietData.message}</p>
+                    <div class="resolution-options">
+                        <button class="resolution-btn resolution-primary" onclick="resolveConflict('keepDiet')">ডায়েট রাখুন, উপাদান সরান</button>
+                        <button class="resolution-btn resolution-secondary" onclick="resolveConflict('keepIngredient')">উপাদান রাখুন, ডায়েট সরান</button>
+                    </div>
+                `;
+            }
             
             // Insert conflict resolution card after dietary preferences
             const dietaryPreferences = document.querySelector('.dietary-preferences');
@@ -3684,6 +3928,7 @@
             
             hideConflictAlert();
             updateIngredientSuggestions();
+            updateClearButtonVisibility();
         }
         
         function addToSelected(ingredient) {
@@ -3709,6 +3954,9 @@
                 if (selectedIngredients.length > 0) {
                     document.getElementById('find-recipes-btn').disabled = false;
                 }
+                
+                // Update clear button visibility
+                updateClearButtonVisibility();
             }
         }
         
@@ -3728,6 +3976,9 @@
             
             // Update ingredient suggestions
             updateIngredientSuggestions();
+            
+            // Update clear button visibility
+            updateClearButtonVisibility();
         }
         
         function updateSelectedIngredients() {
@@ -3969,6 +4220,10 @@
             // Update rating display
             updateRatingDisplay(recipe.id);
             
+            // Check if recipe is saved
+            const isSaved = userPreferences.savedRecipes.includes(recipe.id);
+            updateSaveButton(isSaved);
+            
             // Update related recipes
             const relatedContainer = document.getElementById('related-recipes');
             relatedContainer.innerHTML = '';
@@ -4004,22 +4259,39 @@
                 relatedContainer.appendChild(card);
             });
             
+            // Initialize star rating
+            initStarRating();
+            
             // Show the detail screen
             showScreen('screen-4');
         }
         
         function toggleSaveRecipe() {
-            const saveBtn = document.getElementById('save-recipe-btn');
-            isRecipeSaved = !isRecipeSaved;
+            const isSaved = userPreferences.savedRecipes.includes(currentRecipeId);
             
-            if (isRecipeSaved) {
+            if (isSaved) {
+                // Remove from saved
+                userPreferences.savedRecipes = userPreferences.savedRecipes.filter(id => id !== currentRecipeId);
+                updateSaveButton(false);
+            } else {
+                // Add to saved
+                userPreferences.savedRecipes.push(currentRecipeId);
+                updateSaveButton(true);
+            }
+        }
+        
+        function updateSaveButton(isSaved) {
+            const saveBtn = document.getElementById('save-recipe-btn');
+            const recipeDetailContainer = document.getElementById('recipe-detail-container');
+            
+            if (isSaved) {
                 saveBtn.innerHTML = '<i class="fas fa-heart"></i> ' + (currentLanguage === 'en' ? 'Saved' : 'সংরক্ষিত');
-                saveBtn.style.color = '#ff5722';
-                saveBtn.style.borderColor = '#ff5722';
+                saveBtn.classList.add('saved');
+                recipeDetailContainer.classList.add('saved-recipe');
             } else {
                 saveBtn.innerHTML = '<i class="far fa-heart"></i> ' + (currentLanguage === 'en' ? 'Save Recipe' : 'রেসিপি সংরক্ষণ করুন');
-                saveBtn.style.color = '#f0f0f0';
-                saveBtn.style.borderColor = '#ffeb3b';
+                saveBtn.classList.remove('saved');
+                recipeDetailContainer.classList.remove('saved-recipe');
             }
         }
         
@@ -4037,10 +4309,36 @@
             console.log("Missing ingredients added to cart");
         }
         
-        function quickStart(type) {
-            // Pre-populate ingredients based on quick start type
+        function resetAllPreferences() {
+            // Clear selected ingredients
             selectedIngredients = [];
+            updateSelectedIngredients();
             
+            // Clear dietary preferences
+            activeDiets = [];
+            document.querySelectorAll('.preference-option').forEach(option => {
+                option.classList.remove('active');
+                option.classList.remove('conflict');
+            });
+            
+            // Hide any conflict alerts
+            hideConflictAlert();
+            
+            // Update ingredient suggestions
+            updateIngredientSuggestions();
+            
+            // Disable the Find Recipes button
+            document.getElementById('find-recipes-btn').disabled = true;
+            
+            // Update clear button visibility
+            updateClearButtonVisibility();
+        }
+        
+        function quickStart(type) {
+            // Reset everything first
+            resetAllPreferences();
+            
+            // Pre-populate ingredients based on quick start type
             if (type === 'quick30' || type === 'quick15' || type === 'quick5') {
                 selectedIngredients = ['Chicken', 'Rice', 'Onions', 'Garlic'];
             } else if (type === 'lowCal' || type === 'highProtein' || type === 'lowCarb') {
@@ -4049,13 +4347,43 @@
                 selectedIngredients = ['Chicken', 'Tomatoes', 'Garlic', 'Bell Peppers', 'Rice'];
             } else if (type === 'vegetarian' || type === 'vegan' || type === 'glutenFree') {
                 selectedIngredients = ['Tomatoes', 'Bell Peppers', 'Carrots', 'Onions', 'Rice'];
+                
+                // Set the dietary preference based on the type
+                if (type === 'vegetarian') {
+                    toggleDiet('vegetarian');
+                } else if (type === 'vegan') {
+                    toggleDiet('vegan');
+                } else if (type === 'glutenFree') {
+                    toggleDiet('glutenFree');
+                }
             }
             
             updateSelectedIngredients();
             document.getElementById('find-recipes-btn').disabled = false;
+            updateClearButtonVisibility();
             showScreen('screen-2');
         }
         
+        // NEW: Update clear button visibility
+        function updateClearButtonVisibility() {
+            const dietaryClearContainer = document.getElementById('dietary-clear-container');
+            const ingredientsClearContainer = document.getElementById('ingredients-clear-container');
+            
+            // Show dietary clear button only if there are active diets
+            if (activeDiets.length > 0) {
+                dietaryClearContainer.classList.remove('hidden');
+            } else {
+                dietaryClearContainer.classList.add('hidden');
+            }
+            
+            // Show ingredients clear button only if there are selected ingredients
+            if (selectedIngredients.length > 0) {
+                ingredientsClearContainer.classList.remove('hidden');
+            } else {
+                ingredientsClearContainer.classList.add('hidden');
+            }
+        }
+
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
             updateSelectedIngredients();
@@ -4064,8 +4392,8 @@
             updateVideoRecommendations();
             updatePantryDisplay();
             updateCartDisplay();
-            initStarRating();
             updateLanguage();
+            updateClearButtonVisibility();
             
             // Set default filter
             currentFilter = "all";
